@@ -50,7 +50,9 @@ const {
       })();
     </script>
 
-    <!-- Self-hosted display serif (Playfair Display); the sans is a system stack. -->
+    <!-- Self-hosted fonts, first-party (no third-party calls): DM Sans (body/UI,
+         single variable file) + Playfair Display (display serif headlines). -->
+    <link rel="preload" href="/fonts/DMSans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/PlayfairDisplay-latin.woff2" as="font" type="font/woff2" crossorigin />
     {
       preloadImage && (
