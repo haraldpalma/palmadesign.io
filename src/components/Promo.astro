@@ -1,0 +1,84 @@
+---
+// Marketing popup: appears once (after a delay or scroll), theme-aware, dismissible.
+// Offers the two core moves and drives to /contact. Remembers dismissal so it
+// never nags the same visitor twice.
+---
+<div class="promo" data-promo hidden>
+  <div class="promo-backdrop" data-promo-close></div>
+  <div class="promo-card" role="dialog" aria-modal="true" aria-labelledby="promo-title">
+    <button type="button" class="promo-x" data-promo-close aria-label="Close">×</button>
+    <p class="promo-eyebrow">Free scoping call</p>
+    <h2 class="promo-title" id="promo-title">Transfer now.</h2>
+    <ul class="promo-list">
+      <li>
+        <span class="promo-arrow">→</span>
+        Your website to a faster build that Google <em>and</em> AI assistants actually read.
+      </li>
+      <li>
+        <span class="promo-arrow">→</span>
+        Your spreadsheet to a real app on Softr your team will use.
+      </li>
+    </ul>
+    <div class="promo-actions">
+      <a class="btn-yellow" href="/contact" data-promo-cta>Book a call →</a>
+      <button type="button" class="promo-later" data-promo-close>Maybe later</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const KEY = 'pd-promo-dismissed';
+  const promo = document.querySelector<HTMLElement>('[data-promo]');
+  if (promo) {
+    let shown = false;
+    const dismissed = (() => {
+      try {
+        return localStorage.getItem(KEY);
+      } catch {
+        return null;
+      }
+    })();
+
+    function open() {
+      if (shown || dismissed) return;
+      shown = true;
+      promo.hidden = false;
+      requestAnimationFrame(() => promo.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
+      promo.querySelector<HTMLElement>('.btn-yellow')?.focus();
+    }
+    function close() {
+      promo.classList.remove('is-open');
+      document.body.style.overflow = '';
+      try {
+        localStorage.setItem(KEY, String(Date.now()));
+      } catch {}
+      setTimeout(() => (promo.hidden = true), 250);
+    }
+
+    if (!dismissed) {
+      // Whichever comes first: 18s dwell, or scrolling 45% down the page.
+      const timer = setTimeout(open, 18000);
+      const onScroll = () => {
+        const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        if (p > 0.45) {
+          clearTimeout(timer);
+          open();
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    promo.querySelectorAll('[data-promo-close]').forEach((b) => b.addEventListener('click', close));
+    // CTA closes (and navigates) without re-nagging.
+    promo.querySelector('[data-promo-cta]')?.addEventListener('click', () => {
+      try {
+        localStorage.setItem(KEY, String(Date.now()));
+      } catch {}
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !promo.hidden) close();
+    });
+  }
+</script>

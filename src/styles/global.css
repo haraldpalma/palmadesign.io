@@ -1498,3 +1498,99 @@ a.work-row:hover {
   .workrow.rev .work-media { order: 0; }
   .hero-xl { padding: 120px 0 56px; }
 }
+
+/* ---- Promo popup -------------------------------------------------------- */
+.promo {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.promo[hidden] { display: none; }
+.promo-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 15, 19, 0.55);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.promo.is-open .promo-backdrop { opacity: 1; }
+.promo-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 40px 40px 34px;
+  box-shadow: 0 30px 80px -20px rgba(15, 15, 19, 0.45);
+  transform: translateY(14px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.promo.is-open .promo-card { transform: none; opacity: 1; }
+.promo-x {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color var(--ease), background var(--ease);
+}
+.promo-x:hover { color: var(--text); background: var(--canvas); }
+.promo-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+.promo-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 40px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin: 0 0 20px;
+}
+.promo-list {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.promo-list li {
+  display: flex;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.promo-list em { font-style: italic; }
+.promo-arrow { color: var(--ember); flex: none; font-weight: 700; }
+.promo-actions { display: flex; align-items: center; gap: 18px; }
+.promo-later {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.promo-later:hover { color: var(--text); }
+@media (max-width: 520px) {
+  .promo-card { padding: 32px 24px 26px; }
+  .promo-title { font-size: 32px; }
+}
