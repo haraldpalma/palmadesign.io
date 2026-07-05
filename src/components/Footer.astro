@@ -1,4 +1,5 @@
 ---
+import Logo from './Logo.astro';
 import { org, brand } from '../lib/site';
 const year = new Date().getFullYear();
 ---
@@ -6,7 +7,7 @@ const year = new Date().getFullYear();
   <div class="wrap-wide">
     <div class="footer2-top">
       <div>
-        <div class="footer2-brand">{brand.name}</div>
+        <div class="footer2-brand"><Logo variant="wordmark" height={26} /></div>
         <p class="footer2-tag">
           Palma Design is a Vienna-based design &amp; no-code studio helping businesses build
           portals, tools and websites — and keep them running.
