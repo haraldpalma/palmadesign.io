@@ -16,20 +16,20 @@ const jsonLd = graph(
 );
 ---
 <BaseLayout title={m.title} description={m.description} path="/contact" jsonLd={jsonLd}>
-  <div class="page-intro" style="padding-bottom:88px">
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">{c.eyebrow}</p>
+      <h1 class="page-head">
+        {head[0]}<em class="headline-em">{c.headlineEmphasis}</em>{head[1]}
+      </h1>
+      <p class="page-lead">{c.intro}</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding:64px 0 88px">
     <div class="wrap">
       <div class="contact-grid">
         <div>
-          <p class="eyebrow">{c.eyebrow}</p>
-          <h1
-            class="page-head"
-            style="font-size:52px;line-height:1.05;max-width:none;margin:18px 0 24px"
-          >
-            {head[0]}<em class="headline-em">{c.headlineEmphasis}</em>{head[1]}
-          </h1>
-          <p style="font-size:16px;line-height:1.75;color:var(--muted);max-width:400px;margin:0 0 40px">
-            {c.intro}
-          </p>
           <div class="contact-channel">
             <div class="label">Direct</div>
             <a href={`mailto:${c.email}`}>{c.email}</a>
@@ -76,7 +76,7 @@ const jsonLd = graph(
         </form>
       </div>
     </div>
-  </div>
+  </section>
 </BaseLayout>
 
 <script>
