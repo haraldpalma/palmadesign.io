@@ -2,10 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site, meta, brand, SITE_URL } from '../lib/site';
 import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+import showcase from '../content/settings/services-showcase.json';
 
 const s = site.services;
 const m = meta.services;
 const head = s.headline.split(s.headlineEmphasis);
+
+// Project screenshots for the overlapping showcase row (editable in Keystatic:
+// Singletons → "Services — showcase images"). Normalise so a bare Keystatic
+// filename and a full public path both resolve; cap at four.
+const shots = (showcase.images ?? [])
+  .filter((i: { src?: string }) => i && i.src)
+  .slice(0, 4)
+  .map((i: { src: string; alt?: string }) => ({
+    src: /^(https?:)?\//.test(i.src) ? i.src : `/images/showcase/${i.src}`,
+    alt: i.alt ?? '',
+  }));
 
 const service = {
   '@type': 'Service',
@@ -43,7 +55,24 @@ const jsonLd = graph(
 
   <section class="section" style="padding:80px 0">
     <div class="wrap">
-      <h2 class="eyebrow" style="margin-bottom:28px">What we build</h2>
+      {
+        shots.length > 0 && (
+          <div class="showcase" data-showcase aria-label="Selected project screenshots">
+            <div class="showcase-row">
+              {shots.map((shot, i) => (
+                <figure
+                  class="showcase-item"
+                  style={`--i:${i};--conv:${(1.5 - i) * 56}px`}
+                >
+                  <div class="showcase-shot">
+                    <img src={shot.src} alt={shot.alt} loading="lazy" width="800" height="500" />
+                  </div>
+                </figure>
+              ))}
+            </div>
+          </div>
+        )
+      }
       <div class="block-list">
         {
           s.offerings.map((o: { title: string; body: string }) => (
@@ -63,3 +92,48 @@ const jsonLd = graph(
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Reveal the showcase when it scrolls into view: images spread from an
+  // overlapped cluster into a straight row (staggered). Then a very light
+  // parallax keeps them alive as you keep scrolling. No-JS = static row;
+  // reduced-motion = no animation.
+  const el = document.querySelector<HTMLElement>('[data-showcase]');
+  if (el) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      el.classList.add('in');
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              el.classList.add('in');
+              io.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      io.observe(el);
+
+      const items = Array.from(el.querySelectorAll<HTMLElement>('.showcase-shot'));
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const r = el.getBoundingClientRect();
+          // progress: -1 (below viewport) → 1 (above), 0 when centred
+          const p = (window.innerHeight / 2 - (r.top + r.height / 2)) / window.innerHeight;
+          items.forEach((it, i) => {
+            it.style.setProperty('--px', `${(i - 1.5) * p * 14}px`);
+          });
+          ticking = false;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  }
+</script>

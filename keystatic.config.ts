@@ -2,7 +2,7 @@
 // Editing at /keystatic commits to the repo; Netlify auto-builds. Manages the
 // case-study collection. (Fixed page copy lives in src/content/site.json and can
 // be exposed as a Keystatic singleton later, same as haraldpalma.com did.)
-import { config, collection, fields } from '@keystatic/core';
+import { config, collection, singleton, fields } from '@keystatic/core';
 import { brand } from './brand.config';
 
 const [repoOwner, repoName] = brand.keystaticRepo.split('/');
@@ -11,6 +11,30 @@ export default config({
   storage: {
     kind: 'github',
     repo: { owner: repoOwner, name: repoName },
+  },
+  singletons: {
+    servicesShowcase: singleton({
+      label: 'Services — showcase images',
+      path: 'src/content/settings/services-showcase',
+      format: { data: 'json' },
+      schema: {
+        images: fields.array(
+          fields.object({
+            src: fields.image({
+              label: 'Project screenshot',
+              directory: 'public/images/showcase',
+              publicPath: '/images/showcase/',
+            }),
+            alt: fields.text({ label: 'Alt text (describe the screenshot)' }),
+          }),
+          {
+            label: 'Screenshots',
+            description: 'Four project screenshots shown as an overlapping row on the Services page.',
+            itemLabel: (p) => p.fields.alt.value || 'Screenshot',
+          }
+        ),
+      },
+    }),
   },
   collections: {
     work: collection({
