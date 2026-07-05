@@ -51,7 +51,8 @@
 /* Palma Design — light editorial/agency palette. The base is light; full-bleed
    sections opt into DARK or YELLOW via [data-sec], which re-maps the same token
    names so every component inside auto-adapts. Accent is yellow (#fdd700). */
-:root {
+:root,
+[data-theme='light'] {
   --canvas: #f1f0f0; /* warm off-white page */
   --surface: #ffffff; /* light raised surface */
   --text: #232325; /* near-black ink */
@@ -64,7 +65,22 @@
   --navbg: rgba(20, 20, 25, 0.82);
   color-scheme: light;
 }
-/* Dark full-bleed sections (hero, expertise, footer) */
+/* Dark THEME — the light base sections flip to dark (hero/expertise/footer,
+   already dark via [data-sec], stay dark; the yellow CTA stays yellow). */
+[data-theme='dark'] {
+  --canvas: #0f0f13; /* page background in dark mode */
+  --surface: #1b1b21; /* raised surface */
+  --text: #f2f2f4; /* primary text */
+  --muted: #adadb4; /* supporting (AA on dark) */
+  --faint: #8a8a92; /* captions / meta */
+  --line: rgba(255, 255, 255, 0.12);
+  --ember: #fdd700;
+  --btnink: #232325;
+  --ink: #0f0f13;
+  --navbg: rgba(15, 15, 19, 0.82);
+  color-scheme: dark;
+}
+/* Dark full-bleed sections (hero, expertise, footer) — forced dark in both themes */
 [data-sec='dark'] {
   --canvas: #141419;
   --surface: #232325;

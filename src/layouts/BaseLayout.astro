@@ -28,24 +28,23 @@ const {
 } = Astro.props;
 ---
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0C0C0D" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#f1f0f0" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- No-flash theme: resolve persisted theme before first paint. -->
+    <!-- No-flash theme: resolve persisted theme before first paint (default light). -->
     <script is:inline>
       (function () {
         try {
-          var t = localStorage.getItem('hp-theme');
-          if (t !== 'light' && t !== 'dark') t = 'dark';
+          var t = localStorage.getItem('pd-theme');
+          if (t !== 'light' && t !== 'dark') t = 'light';
           document.documentElement.setAttribute('data-theme', t);
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.setAttribute('data-theme', 'light');
         }
       })();
     </script>

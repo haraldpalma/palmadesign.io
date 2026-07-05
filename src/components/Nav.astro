@@ -22,6 +22,11 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
       }
     </div>
 
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light / dark theme">
+      <svg class="ic ic-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      <svg class="ic ic-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+    </button>
+
     <a href="/contact" class="nav-cta">{brand.cta}</a>
 
     <button type="button" class="nav-burger" data-menu-open aria-label="Open menu" aria-expanded="false">
@@ -43,6 +48,21 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
 </div>
 
 <script>
+  // --- Light / dark theme -------------------------------------------------
+  const root = document.documentElement;
+  function setTheme(t: string) {
+    root.setAttribute('data-theme', t);
+    try {
+      localStorage.setItem('pd-theme', t);
+    } catch {}
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach((btn) =>
+    btn.addEventListener('click', () =>
+      setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')
+    )
+  );
+
+  // --- Mobile drawer ------------------------------------------------------
   const drawer = document.querySelector('[data-drawer]');
   const openBtn = document.querySelector('[data-menu-open]');
   function setMenu(open: boolean) {

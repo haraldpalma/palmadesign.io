@@ -201,30 +201,27 @@ em.ember,
 .theme-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  height: 36px;
-  padding: 0 15px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   border: 1px solid var(--line);
-  border-radius: var(--pill);
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+  border-radius: 50%;
+  color: var(--text);
   background: none;
   cursor: pointer;
-  transition: color var(--ease), border-color var(--ease);
+  transition: border-color var(--ease), background var(--ease);
 }
 .theme-toggle:hover {
-  color: var(--text);
-  border-color: var(--muted);
+  border-color: var(--text);
 }
-.theme-toggle .dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--ember);
+.theme-toggle .ic {
+  display: none;
+}
+[data-theme='light'] .theme-toggle .ic-moon {
+  display: block;
+}
+[data-theme='dark'] .theme-toggle .ic-sun {
+  display: block;
 }
 .nav-cta {
   display: inline-flex;
