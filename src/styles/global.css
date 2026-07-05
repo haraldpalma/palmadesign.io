@@ -90,11 +90,8 @@ em.ember,
   color: var(--ember);
 }
 .headline-em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--ember);
-  letter-spacing: -0.01em;
+  font-weight: inherit;
+  color: var(--text);
 }
 
 /* ---- Buttons ------------------------------------------------------------ */
@@ -518,11 +515,11 @@ a.work-row:hover {
   color: var(--ember);
 }
 .post-card h3 {
-  font-family: var(--font-serif);
   font-weight: 500;
   font-size: 23px;
   line-height: 1.25;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  color: var(--text);
   margin: 16px 0 12px;
 }
 .post-excerpt {
@@ -592,9 +589,10 @@ a.work-row:hover {
   padding-top: 22px;
 }
 .principle h3 {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+  color: var(--text);
   margin: 0 0 10px;
 }
 .principle p {
