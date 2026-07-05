@@ -50,9 +50,8 @@ const {
       })();
     </script>
 
-    <!-- Preload the two display fonts actually used above the fold. -->
-    <link rel="preload" href="/fonts/Epilogue-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Fraunces-Italic-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Self-hosted display serif (Playfair Display); the sans is a system stack. -->
+    <link rel="preload" href="/fonts/PlayfairDisplay-latin.woff2" as="font" type="font/woff2" crossorigin />
     {
       preloadImage && (
         <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />

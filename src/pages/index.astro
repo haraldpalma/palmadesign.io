@@ -1,146 +1,130 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, meta, brand, SITE_URL, SITE_NAME } from '../lib/site';
-import { graph, webPageNode, breadcrumbNode, faqNode } from '../lib/schema';
+import { site, meta, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
 
-const h = site.home;
-const faqs = site.faqs as { q: string; a: string }[];
 const m = meta.home;
+const proof = site.home.proof as { key: string; rest: string }[];
 
-// Selected work pulls from the real case-study collection so the home never drifts.
-const selected = (await getCollection('work', ({ data }) => !data.draft))
-  .sort((a, b) => (a.data.year < b.data.year ? 1 : -1))
-  .slice(0, 3);
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) =>
+  a.data.year < b.data.year ? 1 : -1
+);
 
-function splitEmphasis(text: string, word: string) {
-  const i = text.indexOf(word);
-  if (i === -1) return { before: text, word: '', after: '' };
-  return { before: text.slice(0, i), word, after: text.slice(i + word.length) };
-}
-const head = splitEmphasis(h.headline, h.headlineEmphasis);
-const quote = splitEmphasis(h.quote, h.quoteEmphasis);
+const expertise = [
+  { title: 'Client portals & apps', body: 'Authenticated portals, marketplaces and member sites on Softr and Airtable — roles and permissions solved once and kept solved.' },
+  { title: 'Internal tools', body: 'The app that replaces the spreadsheet: ordering systems, intranets, project trackers, knowledge bases. Fast to ship, easy to change.' },
+  { title: 'Custom websites', body: 'Fast static sites built with Claude — like this one — engineered to be found by Google and quoted by AI assistants.' },
+  { title: 'AI & automation', body: 'Make, REST APIs and AI wired into your workflow to remove the steps nobody enjoys — measured against real outcomes.' },
+];
 
 const jsonLd = graph(
-  webPageNode({ url: `${SITE_URL}/`, name: m.title, description: h.headline, about: true }),
-  breadcrumbNode([{ name: 'Home', url: `${SITE_URL}/` }]),
-  faqNode(faqs)
+  webPageNode({ url: `${SITE_URL}/`, name: m.title, description: m.description, about: true }),
+  breadcrumbNode([{ name: 'Home', url: `${SITE_URL}/` }])
 );
 ---
 <BaseLayout title={m.title} description={m.description} path="/" jsonLd={jsonLd}>
-  <!-- Hero -->
-  <header class="hero-header">
-    <div class="wrap">
-      <div class="hero">
-        <div>
-          <p class="eyebrow">{h.eyebrow}</p>
-          <h1>
-            {head.before}<em class="headline-em">{head.word}</em>{head.after}
-          </h1>
-          <p class="hero-sub">{h.subline}</p>
-          <div class="hero-actions">
-            <a class="btn-primary" href="/contact">{h.ctaPrimary}</a>
-            <a class="btn-ghost" href="/work"><span>{h.ctaGhost}</span></a>
-          </div>
-        </div>
-        <div class="portrait">
-          <img src="/img/portrait.svg" alt="Palma Design" width="640" height="800" fetchpriority="high" />
-          <div class="portrait-caption">{h.portraitCaption}</div>
-        </div>
+  <!-- HERO (dark) -->
+  <header class="bleed hero-xl" data-sec="dark">
+    <div class="wrap-wide">
+      <p class="hero-eyebrow">Design &amp; no-code Studio — Vienna</p>
+      <h1 class="hero-title">Software your team will <span class="accent">actually use</span></h1>
+      <div class="hero-actions">
+        <a class="btn-yellow" href="/work">View our work</a>
+        <a class="btn-outline" href="/contact">Start a project →</a>
       </div>
     </div>
   </header>
 
-  <!-- Proof row -->
-  <div class="proof-band">
-    <div class="wrap">
-      <div class="proof">
-        {
-          h.proof.map((p: { key: string; rest: string }) => (
-            <div class="proof-item">
-              <b>{p.key}</b> {p.rest}
-            </div>
-          ))
-        }
-      </div>
+  <!-- PROOF -->
+  <div class="bleed">
+    <div class="wrap-wide" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px 40px;padding:32px 0;border-bottom:1px solid var(--line)">
+      {
+        proof.map((p) => (
+          <div style="font-size:clamp(15px,1.6vw,22px);color:var(--muted)">
+            <b style="color:var(--text);font-weight:700">{p.key}</b> {p.rest}
+          </div>
+        ))
+      }
     </div>
   </div>
 
-  <!-- What we do -->
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="eyebrow">What we do</h2>
-        <div class="serif-note">01 — 03</div>
+  <!-- THE STUDIO -->
+  <section class="bleed agency">
+    <div class="wrap-wide">
+      <p class="agency-eyebrow">The Studio</p>
+      <p class="agency-lead">
+        Palma Design is a Vienna-based design &amp; no-code studio —
+        <span class="muted">we build client portals, internal tools and custom websites on Softr, Airtable and Claude, and keep them running for years.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- OUR WORK -->
+  <section class="bleed workwrap">
+    <div class="wrap-wide">
+      <div class="work-head">
+        <div class="label">Our Work</div>
+        <p class="title">Crafted with <span class="on">structure</span>, <span class="on">clarity</span>, and purpose.</p>
       </div>
       {
-        h.work.map((w: { n: string; title: string; body: string; action: string; page: string }) => (
-          <a class="work-row" href={`/${w.page}`}>
-            <div class="work-num">{w.n}</div>
+        work.map((cs, i) => (
+          <div class:list={['workrow', { rev: i % 2 === 1 }]}>
+            <a class="work-media" href={`/work/${cs.id}`} aria-label={cs.data.title}>
+              Add a screenshot — {cs.data.client}
+            </a>
             <div>
-              <h3>{w.title}</h3>
-              <p>{w.body}</p>
+              <div class="work-num">{String(i + 1).padStart(2, '0')}</div>
+              <h3 class="work-title">{cs.data.client}</h3>
+              <div class="work-cat">{cs.data.category} · {cs.data.industry}</div>
+              <p class="work-body">{cs.data.excerpt}</p>
+              <a class="work-link" href={`/work/${cs.id}`}>View project →</a>
             </div>
-            <div class="work-go">{w.action} →</div>
-          </a>
+          </div>
         ))
       }
     </div>
   </section>
 
-  <!-- Selected work -->
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="eyebrow">Selected work</h2>
-        <a class="serif-note" href="/work">All work →</a>
-      </div>
-      <div class="grid3">
-        {
-          selected.map((cs) => (
-            <a class="post-card" href={`/work/${cs.id}`}>
-              <div class="post-cat">{cs.data.category}</div>
-              <h3>{cs.data.title}</h3>
-              <div class="post-meta">
-                {cs.data.client} · {cs.data.industry} · {cs.data.year}
-              </div>
-            </a>
-          ))
-        }
-      </div>
+  <!-- EXPERTISE (dark) -->
+  <section class="bleed expertise" data-sec="dark">
+    <div class="wrap-wide">
+      <h2 class="expertise-h">Expertise</h2>
+      {
+        expertise.map((e) => (
+          <div class="exp-item">
+            <h3 class="exp-title">{e.title}</h3>
+            <p class="exp-desc">{e.body}</p>
+          </div>
+        ))
+      }
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head" style="margin-bottom:44px">
-        <h2 class="eyebrow">Questions</h2>
-        <div class="serif-note">Straight answers</div>
-      </div>
-      <div class="faq">
-        {
-          faqs.map((f) => (
-            <details>
-              <summary>
-                <span>{f.q}</span>
-                <span class="plus">+</span>
-              </summary>
-              <p>{f.a}</p>
-            </details>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Quote band -->
-  <section class="quote-band">
-    <div class="wrap">
-      <blockquote class="quote">
-        {quote.before}<em>{quote.word}</em>{quote.after}
+  <!-- TESTIMONIAL -->
+  <section class="bleed testimonial">
+    <div class="wrap-wide">
+      <p class="t-eyebrow">What our clients say</p>
+      <blockquote>
+        "A huge improvement over what we had before — much more efficient. The combination of
+        personalized budgets, dashboards and admin controls was exactly what we needed."
       </blockquote>
-      <div class="quote-sig">— {SITE_NAME}</div>
+      <div class="t-who">
+        <div class="t-avatar"></div>
+        <div>
+          <div class="t-name">Baumit team</div>
+          <div class="t-role">Enterprise ordering system</div>
+        </div>
+      </div>
+      <p class="t-note">Client feedback from the Baumit project — a named quote can replace this.</p>
+    </div>
+  </section>
+
+  <!-- CTA (yellow) -->
+  <section class="bleed cta-band" data-sec="yellow">
+    <div class="wrap-wide">
+      <h2>Want to start a project with us?</h2>
+      <a class="btn-dark" href="/contact">Get in touch →</a>
     </div>
   </section>
 </BaseLayout>

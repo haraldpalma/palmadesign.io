@@ -11,32 +11,22 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ---- Fonts: self-hosted, subset to latin, variable weight axis ------------ */
-/* Defaults ship Epilogue (UI/display) + Fraunces (editorial serif), both OFL. */
+/* Type — self-hosted, no third-party calls (best for SEO + GDPR):
+   • Serif display: Playfair Display (Google/OFL) — stand-in for Ogg Text.
+   • Sans: a system Arial/Helvetica stack — identical metrics to Liberation Sans,
+     zero download. (The design's Adobe Ogg + Liberation Sans were swapped to
+     SEO-friendly equivalents.) */
 @font-face {
-  font-family: 'Epilogue';
-  src: url('/fonts/Epilogue-latin.woff2') format('woff2');
-  font-weight: 100 900;
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-latin.woff2') format('woff2');
+  font-weight: 400 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Epilogue';
-  src: url('/fonts/Epilogue-Italic-latin.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Fraunces';
-  src: url('/fonts/Fraunces-latin.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Fraunces';
-  src: url('/fonts/Fraunces-Italic-latin.woff2') format('woff2');
-  font-weight: 100 900;
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Italic-latin.woff2') format('woff2');
+  font-weight: 400 900;
   font-style: italic;
   font-display: swap;
 }
@@ -49,8 +39,8 @@
   --radius: 4px;
   --pill: 9999px;
 
-  --font-sans: 'Epilogue', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
   --ease: 0.2s ease;
 }
@@ -58,29 +48,41 @@
 /* ---- Color tokens — the brand palette ------------------------------------- */
 /* Dark is the default theme; light is the toggle. Keep the token NAMES; change
    only the VALUES. --accent is the single accent used with discipline. */
-/* Palma Design — cooler, more technical palette. --ember keeps its name (the
-   accent) but is now a cool electric blue. Placeholder values; Harald refines. */
-[data-theme='dark'] {
-  --canvas: #0a0b0e; /* cool near-black */
-  --surface: #15171c; /* cool raised panel */
-  --text: #eceef2; /* cool white */
-  --muted: #8b909c; /* cool gray */
-  --faint: #565b66; /* captions / meta */
-  --line: rgba(236, 238, 242, 0.12);
-  --ember: #6e8bff; /* THE accent — cool electric blue */
-  --btnink: #080a10; /* ink on the accent button */
-  --navbg: rgba(10, 11, 14, 0.82);
+/* Palma Design — light editorial/agency palette. The base is light; full-bleed
+   sections opt into DARK or YELLOW via [data-sec], which re-maps the same token
+   names so every component inside auto-adapts. Accent is yellow (#fdd700). */
+:root {
+  --canvas: #f1f0f0; /* warm off-white page */
+  --surface: #ffffff; /* light raised surface */
+  --text: #232325; /* near-black ink */
+  --muted: #707070; /* supporting text */
+  --faint: #a2a2a2; /* captions / meta / disabled */
+  --line: #dfdfdf; /* hairline */
+  --ember: #fdd700; /* THE accent — yellow */
+  --btnink: #232325; /* ink on the yellow button */
+  --ink: #141419; /* dark-section background reference */
+  --navbg: rgba(20, 20, 25, 0.82);
+  color-scheme: light;
+}
+/* Dark full-bleed sections (hero, expertise, footer) */
+[data-sec='dark'] {
+  --canvas: #141419;
+  --surface: #232325;
+  --text: #ffffff;
+  --muted: #c2c2c2;
+  --faint: #8a8a8a;
+  --line: rgba(223, 223, 223, 0.22);
+  --btnink: #232325;
   color-scheme: dark;
 }
-[data-theme='light'] {
-  --canvas: #f5f6f8; /* cool paper */
-  --surface: #eaecef;
-  --text: #14161a;
-  --muted: #5c626c;
-  --faint: #99a0aa;
-  --line: rgba(20, 22, 26, 0.12);
-  --ember: #3a5be0; /* accent deepened for contrast on light */
+/* Yellow full-bleed section (CTA band) */
+[data-sec='yellow'] {
+  --canvas: #fdd700;
+  --surface: #fdd700;
+  --text: #232325;
+  --muted: #33331f;
+  --faint: #6a6a42;
+  --line: rgba(35, 35, 37, 0.18);
   --btnink: #ffffff;
-  --navbg: rgba(245, 246, 248, 0.85);
   color-scheme: light;
 }

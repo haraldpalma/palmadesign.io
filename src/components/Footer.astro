@@ -1,41 +1,29 @@
 ---
-import Logo from './Logo.astro';
-import { site, org, brand, NAV } from '../lib/site';
+import { org, brand } from '../lib/site';
 const year = new Date().getFullYear();
-const footer = site.footer;
-const sibling = org.siblingLink;
 ---
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-cols">
-      <div class="footer-lead">
-        <Logo variant="mark" height={30} />
-        <div class="line">{footer.lead}</div>
+<footer class="bleed footer2" data-sec="dark">
+  <div class="wrap-wide">
+    <div class="footer2-top">
+      <div>
+        <div class="footer2-brand">{brand.name}</div>
+        <p class="footer2-tag">
+          Palma Design is a Vienna-based design &amp; no-code studio helping businesses build
+          portals, tools and websites — and keep them running.
+        </p>
       </div>
-
-      <div class="footer-col">
-        <b>Explore</b>
-        {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
-      </div>
-
-      <div class="footer-col">
-        <b>Elsewhere</b>
+      <div class="footer2-col">
+        <div class="h">Contact</div>
         <a href={`mailto:${org.email}`}>{org.email}</a>
-        <a href={org.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
-        {
-          sibling && (
-            <a class="studio" href={sibling.url} rel="noopener" target="_blank">
-              {sibling.label}
-            </a>
-          )
-        }
+      </div>
+      <div class="footer2-col">
+        <div class="h">Location</div>
+        <span>Vienna, Austria</span>
       </div>
     </div>
-
-    <div class="footer-bar">
-      <div>© {year} {brand.name}. {brand.city}.</div>
+    <div class="footer2-bar">
+      <div>© {year} {brand.name}. All rights reserved.</div>
       <div class="links">
-        <button type="button" data-consent-reopen>Cookie settings</button>
         <a href="/impressum">Impressum</a>
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
