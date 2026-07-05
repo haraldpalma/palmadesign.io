@@ -1,0 +1,87 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_URL, SITE_NAME, OG_IMAGE } from '../../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const items = await getCollection('work', ({ data }) => !data.draft);
+  return items.map((cs) => ({ params: { slug: cs.id }, props: { cs } }));
+}
+
+const { cs } = Astro.props;
+const { Content } = await render(cs);
+const d = cs.data;
+
+const url = `${SITE_URL}/work/${cs.id}`;
+const ogImage = d.ogImage ? d.ogImage.src : OG_IMAGE;
+const title = `${d.title} — ${SITE_NAME}`;
+
+const caseStudyNode = {
+  '@type': 'CreativeWork',
+  '@id': `${url}#work`,
+  name: d.title,
+  about: d.industry,
+  dateCreated: d.year,
+  creator: { '@id': `${SITE_URL}/#org` },
+  description: d.excerpt,
+};
+const jsonLd = graph(
+  webPageNode({ url, name: title, description: d.excerpt }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Work', url: `${SITE_URL}/work` },
+    { name: d.client, url },
+  ]),
+  caseStudyNode
+);
+---
+<BaseLayout
+  title={title}
+  description={d.excerpt}
+  path={`/work/${cs.id}`}
+  ogImage={ogImage}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <article>
+    <div class="article-header">
+      <div class="article-narrow">
+        <a class="article-back" href="/work">← Work</a>
+        <div class="post-cat">{d.category}</div>
+        <h1 class="article-title">{d.title}</h1>
+        <div class="article-byline">
+          {d.client} · {d.industry} · {d.year} ·
+          <a href={`/work/${cs.id}.md`} style="color:var(--faint)">Markdown</a>
+        </div>
+      </div>
+    </div>
+
+    {
+      d.metrics.length > 0 && (
+        <div class="wrap" style="max-width:720px">
+          <div class="metrics">
+            {d.metrics.map((mt: { value: string; label: string }) => (
+              <div class="metric">
+                <div class="metric-value">{mt.value}</div>
+                <div class="metric-label">{mt.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    <div class="article-body">
+      <Content />
+      {
+        d.stack.length > 0 && (
+          <div class="stack-row">
+            <span class="stack-label">Built with</span>
+            {d.stack.map((s: string) => <span class="stack-chip">{s}</span>)}
+          </div>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>

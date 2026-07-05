@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { meta, org, brand, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const m = meta.terms;
+// Plain-English studio terms. Review with counsel for the client's jurisdiction.
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/terms`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Terms', url: `${SITE_URL}/terms` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/terms" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1 class="page-head">Terms</h1>
+      <p class="page-lead">The terms under which {brand.name} provides its services.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding:56px 0 92px;border-bottom:none">
+    <div class="legal">
+      <h2>Scope</h2>
+      <p>
+        These terms govern design and development services provided by {org.legalName}, trading as
+        {brand.name} ({brand.legalAddress}, {brand.city}). The specific scope, deliverables and
+        timeline of each engagement are set out in a written proposal, which takes precedence where
+        it differs from these terms.
+      </p>
+
+      <h2>Quotes &amp; fees</h2>
+      <p>
+        Projects are quoted per engagement (typically starting at €3,000, excl. VAT) based on the
+        agreed scope. Ongoing hosting and maintenance are billed as a recurring monthly fee under a
+        separate Hosting &amp; Care agreement. Changes to scope are estimated and agreed before work
+        proceeds.
+      </p>
+
+      <h2>Payment</h2>
+      <p>
+        Unless agreed otherwise, projects are invoiced with a deposit before work begins and the
+        balance on delivery. Recurring fees are invoiced monthly in advance. Invoices are payable
+        within 14 days.
+      </p>
+
+      <h2>Intellectual property &amp; handoff</h2>
+      <p>
+        On full payment, you own the deliverables produced for you and the content and data within
+        them. Third-party platforms (e.g. Softr, Airtable) remain subject to their own terms and
+        licensing. We keep no lock-in: on request, projects transfer to your own accounts.
+      </p>
+
+      <h2>Third-party services</h2>
+      <p>
+        Solutions are often built on third-party platforms and services. Their availability,
+        pricing and terms are outside our control, and their fees (where applicable) are billed to
+        you or paid directly by you.
+      </p>
+
+      <h2>Warranty &amp; liability</h2>
+      <p>
+        We deliver work with professional care. To the extent permitted by law, liability is limited
+        to the fees paid for the engagement giving rise to the claim, and we are not liable for
+        indirect or consequential loss. Nothing in these terms limits liability that cannot be
+        limited by law.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>
+        These terms are governed by Austrian law. Place of jurisdiction is {brand.jurisdiction}.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

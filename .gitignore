@@ -1,0 +1,18 @@
+# build output
+dist/
+# generated types + cache
+.astro/
+# deps
+node_modules/
+# netlify
+.netlify/
+# env / secrets (Keystatic GitHub app + GA live in the host env, never commit)
+.env
+.env.*
+!.env.example
+# font subsetting scratch
+_fontsrc/
+# os / editor
+.DS_Store
+*.log
+npm-debug.log*

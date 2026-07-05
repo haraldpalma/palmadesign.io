@@ -1,0 +1,63 @@
+---
+// Per-page SEO head: title, description, canonical, robots, Open Graph,
+// twitter:card, and the JSON-LD @graph. Rendered inside <head>.
+import { SITE_URL, SITE_NAME, OG_IMAGE } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string; // clean path, e.g. "/advisory" or "/" for home
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: object; // full @graph document
+  type?: 'website' | 'article';
+}
+const {
+  title,
+  description,
+  path,
+  ogImage = OG_IMAGE,
+  noindex = false,
+  jsonLd,
+  type = 'website',
+} = Astro.props;
+
+const canonical = path === '/' ? SITE_URL + '/' : SITE_URL + '/' + path.replace(/^\/+|\/+$/g, '');
+const ogAbsolute = ogImage.startsWith('http') ? ogImage : SITE_URL + ogImage;
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogAbsolute} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogAbsolute} />
+
+<!-- Google Search Console: paste the verification tag here before submitting the sitemap. -->
+<!-- <meta name="google-site-verification" content="REPLACE_ME" /> -->
+
+{
+  jsonLd && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd)
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/&/g, '\\u0026')}
+    />
+  )
+}

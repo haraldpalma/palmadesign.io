@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { meta, org, brand, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const m = meta.impressum;
+// Generic legal disclosure template. Review with counsel for the client's
+// jurisdiction — for Austria/Germany this doubles as the Impressum (ECG §5 /
+// MedienG §25 / DDG §5). Identity comes from brand.config.
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/impressum`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Impressum', url: `${SITE_URL}/impressum` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/impressum" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1 class="page-head">Impressum</h1>
+      <p class="page-lead">Legal disclosure and site ownership information.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding:56px 0 92px;border-bottom:none">
+    <div class="legal">
+      <h2>Site owner &amp; responsible for content</h2>
+      <p>
+        {org.legalName}<br />
+        {brand.legalAddress}<br />
+        {brand.city}
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Email: <a href={`mailto:${org.email}`}>{org.email}</a>
+        {org.phone && <><br />Phone: {org.phone}</>}
+      </p>
+
+      {
+        brand.vatId && (
+          <>
+            <h2>VAT information</h2>
+            <p>VAT ID: {brand.vatId}</p>
+          </>
+        )
+      }
+
+      <h2>Place of jurisdiction</h2>
+      <p>{brand.jurisdiction}.</p>
+
+      <h2>Online dispute resolution (EU)</h2>
+      <p>
+        The European Commission provides a platform for online dispute resolution (ODR):
+        <a href="https://ec.europa.eu/consumers/odr" rel="noopener" target="_blank">
+          ec.europa.eu/consumers/odr</a>. We are neither obliged nor willing to participate in
+        dispute-resolution proceedings before a consumer arbitration board.
+      </p>
+
+      <h2>Liability for content &amp; links</h2>
+      <p>
+        The contents of this site were prepared with care. No guarantee is given for accuracy,
+        completeness or timeliness. This site contains links to external websites over whose
+        content we have no control; responsibility for linked content lies with its respective
+        operator.
+      </p>
+
+      <h2>Copyright</h2>
+      <p>
+        © {new Date().getFullYear()} {org.legalName}. All content, design and code on this site are
+        protected by copyright unless otherwise noted.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

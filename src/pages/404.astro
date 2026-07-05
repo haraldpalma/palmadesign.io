@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_NAME } from '../lib/site';
+---
+<BaseLayout
+  title={`Page not found — ${SITE_NAME}`}
+  description="That page doesn't exist. Head back home, or browse the writing."
+  path="/404"
+  noindex={true}
+>
+  <section class="notfound">
+    <div class="wrap">
+      <div class="code">404</div>
+      <h1>This page wandered off.</h1>
+      <p>The link is broken or the page has moved. Nothing lost — pick a way back in.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a class="btn-primary" href="/">Back home</a>
+        <a class="btn-ghost" href="/work"><span>See the work</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

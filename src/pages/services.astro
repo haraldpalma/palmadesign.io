@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, meta, brand, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const s = site.services;
+const m = meta.services;
+const head = s.headline.split(s.headlineEmphasis);
+
+const service = {
+  '@type': 'Service',
+  name: 'Design & no-code studio services',
+  provider: { '@id': `${SITE_URL}/#org` },
+  areaServed: 'Worldwide',
+  description: s.intro,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: s.offerings.map((o: { title: string; body: string }) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: o.title, description: o.body },
+    })),
+  },
+};
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/services`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Services', url: `${SITE_URL}/services` },
+  ]),
+  service
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/services" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">{s.eyebrow}</p>
+      <h1 class="page-head">{head[0]}<em class="headline-em">{s.headlineEmphasis}</em>{head[1]}</h1>
+      <p class="page-lead">{s.intro}</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding:80px 0">
+    <div class="wrap">
+      <h2 class="eyebrow" style="margin-bottom:28px">What we build</h2>
+      <div class="block-list">
+        {
+          s.offerings.map((o: { title: string; body: string }) => (
+            <div>
+              <h3>{o.title}</h3>
+              <p>{o.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div style="max-width:640px;margin-top:36px">
+        {s.notes.map((n: string) => <p class="prose-note">{n}</p>)}
+      </div>
+      <div class="mt-cta">
+        <a class="btn-primary" href="/contact">{brand.cta}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

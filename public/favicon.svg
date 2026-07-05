@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="Site icon">
+  <rect width="220" height="220" rx="44" fill="#0C0C0D"/>
+  <g transform="translate(24.5,23.5)">
+    <path fill="#E0894A" d="M81 173H18.7547C8.40338 173 0 164.7 0 154.477L0 93L81 93L81 173Z"/>
+    <path fill="#E0894A" d="M81 80L0 80L0 18.5232C0 8.29963 8.40338 0 18.7547 0L81 0L81 80Z"/>
+    <path fill="#E0894A" d="M90 0H152.245C162.597 0 171 8.29963 171 18.5231V61.4768C171 71.7004 162.597 80 152.245 80H90V0Z"/>
+    <path fill="#E0894A" d="M90 93H143V158.043C143 166.297 136.189 173 127.803 173H90V93Z"/>
+  </g>
+</svg>

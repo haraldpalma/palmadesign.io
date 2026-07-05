@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, meta, SITE_URL, org } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const c = site.contact;
+const m = meta.contact;
+const head = c.headline.split(c.headlineEmphasis);
+
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/contact`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Contact', url: `${SITE_URL}/contact` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/contact" jsonLd={jsonLd}>
+  <div class="page-intro" style="padding-bottom:88px">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <p class="eyebrow">{c.eyebrow}</p>
+          <h1
+            class="page-head"
+            style="font-size:52px;line-height:1.05;max-width:none;margin:18px 0 24px"
+          >
+            {head[0]}<em class="headline-em">{c.headlineEmphasis}</em>{head[1]}
+          </h1>
+          <p style="font-size:16px;line-height:1.75;color:var(--muted);max-width:400px;margin:0 0 40px">
+            {c.intro}
+          </p>
+          <div class="contact-channel">
+            <div class="label">Direct</div>
+            <a href={`mailto:${c.email}`}>{c.email}</a>
+          </div>
+          <div class="contact-channel">
+            <div class="label">Elsewhere</div>
+            <a href={org.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Netlify Forms: detected from this static HTML at deploy. Honeypot = bot-field. -->
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-contact-form>
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="visually-hidden">
+            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+          </p>
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="cf-interest">What's this about?</label>
+            <select id="cf-interest" name="interest" required>
+              <option value="" disabled selected>Choose one…</option>
+              <option value="Portal or app">A client portal or app</option>
+              <option value="Internal tool">An internal tool</option>
+              <option value="Website">A website</option>
+              <option value="Migration">A WordPress → Softr migration</option>
+              <option value="Not sure yet">Not sure yet — let's talk</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cf-msg">What are you weighing?</label>
+            <textarea id="cf-msg" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Send message</button>
+          <div class="form-note" data-form-note hidden>
+            Thanks — your message is in. I read every one and reply personally.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Progressive enhancement: AJAX-post to Netlify so we can show an inline
+  // confirmation. Without JS the form falls back to a normal POST (Netlify's
+  // own success page), so it still works either way.
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const note = document.querySelector<HTMLElement>('[data-form-note]');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data as any).toString(),
+      });
+      form.reset();
+      if (note) note.hidden = false;
+      form.querySelector('button[type=submit]')?.setAttribute('disabled', 'true');
+    } catch {
+      // If the AJAX call fails (e.g. local preview), submit normally.
+      form.submit();
+    }
+  });
+</script>

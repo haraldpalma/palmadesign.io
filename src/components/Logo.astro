@@ -1,0 +1,39 @@
+---
+// Brand-agnostic logo. The "mark" is a neutral geometric glyph in the accent
+// colour (swap the SVG paths for a client's real mark if they have one). The
+// "wordmark" pairs the mark with the brand name as text, so it adapts to any
+// brand out of the box and follows currentColor across themes.
+import { brand } from '../../brand.config';
+
+interface Props {
+  variant?: 'wordmark' | 'mark';
+  height?: number;
+  class?: string;
+}
+const { variant = 'wordmark', height = 26, class: klass } = Astro.props;
+const mark = `<path style="fill:var(--ember)" d="M81 173H18.7547C8.40338 173 0 164.7 0 154.477L0 93L81 93L81 173Z"/><path style="fill:var(--ember)" d="M81 80L0 80L0 18.5232C0 8.29963 8.40338 0 18.7547 0L81 0L81 80Z"/><path style="fill:var(--ember)" d="M90 0H152.245C162.597 0 171 8.29963 171 18.5231V61.4768C171 71.7004 162.597 80 152.245 80H90V0Z"/><path style="fill:var(--ember)" d="M90 93H143V158.043C143 166.297 136.189 173 127.803 173H90V93Z"/>`;
+---
+{
+  variant === 'mark' ? (
+    <svg
+      viewBox="0 0 171 173"
+      style={`height:${height}px;width:auto;display:block`}
+      class={klass}
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label={brand.name}
+      set:html={mark}
+    />
+  ) : (
+    <span class:list={['wordmark', klass]} aria-label={brand.name}>
+      <svg
+        viewBox="0 0 171 173"
+        style={`height:${Math.round(height * 0.85)}px;width:auto;display:block`}
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        set:html={mark}
+      />
+      <span class="wordmark-name">{brand.name}<span class="wordmark-dot">.</span></span>
+    </span>
+  )
+}

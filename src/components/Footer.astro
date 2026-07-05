@@ -1,0 +1,45 @@
+---
+import Logo from './Logo.astro';
+import { site, org, brand, NAV } from '../lib/site';
+const year = new Date().getFullYear();
+const footer = site.footer;
+const sibling = org.siblingLink;
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-lead">
+        <Logo variant="mark" height={30} />
+        <div class="line">{footer.lead}</div>
+      </div>
+
+      <div class="footer-col">
+        <b>Explore</b>
+        {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+      </div>
+
+      <div class="footer-col">
+        <b>Elsewhere</b>
+        <a href={`mailto:${org.email}`}>{org.email}</a>
+        <a href={org.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+        {
+          sibling && (
+            <a class="studio" href={sibling.url} rel="noopener" target="_blank">
+              {sibling.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>© {year} {brand.name}. {brand.city}.</div>
+      <div class="links">
+        <button type="button" data-consent-reopen>Cookie settings</button>
+        <a href="/impressum">Impressum</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>

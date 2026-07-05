@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 800" role="img" aria-label="Portrait placeholder">
+  <rect width="640" height="800" fill="#1A1A1D"/>
+  <g fill="none" stroke="#5E5B55" stroke-width="2">
+    <circle cx="320" cy="320" r="118"/>
+    <path d="M150 720c0-104 76-180 170-180s170 76 170 180" stroke-linecap="round"/>
+  </g>
+  <text x="320" y="770" fill="#5E5B55" font-family="system-ui, sans-serif" font-size="22" letter-spacing="3" text-anchor="middle">REPLACE — public/img/portrait</text>
+</svg>

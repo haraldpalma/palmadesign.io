@@ -1,0 +1,103 @@
+---
+// Google Consent Mode v2. All signals default to "denied" BEFORE any analytics
+// loads; equal Accept / Reject; choice stored in localStorage['hp-consent'].
+// GA is deferred to window-load + requestIdleCallback and only after "granted".
+// GA4 measurement ID. GA loads only after the visitor accepts (deferred to idle).
+const GA_ID: string | null = 'G-7GBZ841JN2';
+---
+<div class="consent" data-consent hidden>
+  <div class="consent-inner">
+    <p class="consent-text">
+      We'd like to use privacy-respecting analytics to see what's useful. Nothing loads until you
+      choose, and you can change this anytime under Cookie settings.
+    </p>
+    <div class="consent-actions">
+      <button type="button" class="consent-reject" data-consent-reject>Reject</button>
+      <button type="button" class="consent-accept" data-consent-accept>Accept</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ GA_ID }}>
+  (function () {
+    // Consent Mode v2 default: everything denied until the user chooses.
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = window.gtag || gtag;
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+    });
+
+    var KEY = 'hp-consent';
+    var banner = document.querySelector('[data-consent]');
+    function stored() {
+      try {
+        return localStorage.getItem(KEY);
+      } catch (e) {
+        return null;
+      }
+    }
+    function show() {
+      if (banner) banner.hidden = false;
+    }
+    function hide() {
+      if (banner) banner.hidden = true;
+    }
+
+    function loadAnalytics() {
+      if (!GA_ID) return; // stubbed until a measurement ID exists
+      var run = function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', GA_ID, { anonymize_ip: true });
+      };
+      if ('requestIdleCallback' in window) requestIdleCallback(run);
+      else setTimeout(run, 1);
+    }
+
+    function accept() {
+      try {
+        localStorage.setItem(KEY, 'granted');
+      } catch (e) {}
+      gtag('consent', 'update', {
+        analytics_storage: 'granted',
+      });
+      hide();
+      // Defer GA to idle so it never competes with first paint.
+      if (document.readyState === 'complete') loadAnalytics();
+      else window.addEventListener('load', loadAnalytics, { once: true });
+    }
+    function reject() {
+      try {
+        localStorage.setItem(KEY, 'denied');
+      } catch (e) {}
+      hide();
+    }
+
+    document.querySelectorAll('[data-consent-accept]').forEach(function (b) {
+      b.addEventListener('click', accept);
+    });
+    document.querySelectorAll('[data-consent-reject]').forEach(function (b) {
+      b.addEventListener('click', reject);
+    });
+    document.querySelectorAll('[data-consent-reopen]').forEach(function (b) {
+      b.addEventListener('click', show);
+    });
+
+    var choice = stored();
+    if (choice === 'granted') {
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      window.addEventListener('load', loadAnalytics, { once: true });
+    } else if (choice === null) {
+      show();
+    }
+  })();
+</script>

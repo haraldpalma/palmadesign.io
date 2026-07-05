@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, meta, brand, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const st = site.studio;
+const m = meta.studio;
+const head = st.headline.split(st.headlineEmphasis);
+
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/studio`, name: m.title, description: m.description, about: true }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Studio', url: `${SITE_URL}/studio` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/studio" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">{st.eyebrow}</p>
+      <h1 class="page-head" style="max-width:900px">
+        {head[0]}<em class="headline-em">{st.headlineEmphasis}</em>{head[1]}
+      </h1>
+      <div style="max-width:640px;margin-top:8px">
+        {
+          st.body.map((para: string) => (
+            <p style="font-size:17px;line-height:1.75;color:var(--muted);margin:0 0 18px">{para}</p>
+          ))
+        }
+      </div>
+      <div class="facts" style="margin:40px 0 4px">
+        {
+          st.facts.map((f: { value: string; label: string }) => (
+            <div>
+              <div class="fact-value">{f.value}</div>
+              <div class="fact-label">{f.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding:80px 0">
+    <div class="wrap">
+      <h2 class="eyebrow" style="margin-bottom:28px">How we work</h2>
+      <div class="grid3">
+        {
+          st.principles.map((p: { title: string; body: string }) => (
+            <div class="principle">
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-cta">
+        <a class="btn-primary" href="/contact">{brand.cta}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

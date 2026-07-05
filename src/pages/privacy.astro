@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { meta, org, brand, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const m = meta.privacy;
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/privacy`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Privacy', url: `${SITE_URL}/privacy` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/privacy" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1 class="page-head">Privacy &amp; cookies</h1>
+      <p class="page-lead">
+        How this site handles personal data under the EU GDPR, what cookies it sets, and how to
+        exercise your rights.
+      </p>
+    </div>
+  </div>
+
+  <section class="section" style="padding:56px 0 92px;border-bottom:none">
+    <div class="legal">
+      <h2>Controller</h2>
+      <p>
+        The controller responsible for data processing on this site is:<br />
+        {org.legalName}, {brand.legalAddress}, {brand.city}<br />
+        Email: <a href={`mailto:${org.email}`}>{org.email}</a>
+      </p>
+
+      <h2>What we collect and why</h2>
+      <p>
+        This is a static website. We do not require you to create an account or provide personal
+        data to read it. Personal data is only processed in two cases: when you contact us, and — only
+        with your consent — for privacy-respecting analytics.
+      </p>
+
+      <h2>Contact form &amp; email</h2>
+      <p>
+        If you send a message through the contact form or by email, we process the data you provide
+        (name, email address and your message) solely to respond to your enquiry. Legal basis:
+        Art. 6(1)(b) GDPR (steps prior to entering into a contract) and Art. 6(1)(f) GDPR (our
+        legitimate interest in answering enquiries). Form submissions are handled by our hosting
+        provider, Netlify, acting as a processor. We keep enquiry correspondence only as long as
+        needed to deal with your request and any follow-up.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        This site is hosted by Netlify (Netlify, Inc.). When you visit, your browser transmits
+        technical data (including your IP address) to the host, which is processed to deliver the
+        site securely. Legal basis: Art. 6(1)(f) GDPR. A data processing agreement is in place with
+        the provider.
+      </p>
+
+      <h2>Cookies &amp; analytics</h2>
+      <p>
+        No analytics or tracking cookies are set unless you explicitly accept them in the consent
+        banner. We use Google Consent Mode v2: all analytics signals default to <em>denied</em>, and
+        nothing loads until you choose. You can change your choice at any time via
+        <button type="button" data-consent-reopen style="color:var(--ember);background:none;border:none;padding:0;font:inherit;cursor:pointer;text-decoration:underline">Cookie settings</button>
+        in the footer.
+      </p>
+      <table>
+        <thead>
+          <tr><th>Cookie / storage</th><th>Purpose</th><th>Type</th><th>Retention</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>hp-theme</code></td>
+            <td>Remembers your light/dark theme choice</td>
+            <td>Strictly necessary (localStorage)</td>
+            <td>Until cleared</td>
+          </tr>
+          <tr>
+            <td><code>hp-consent</code></td>
+            <td>Remembers your cookie consent choice</td>
+            <td>Strictly necessary (localStorage)</td>
+            <td>Until cleared</td>
+          </tr>
+          <tr>
+            <td><code>_ga</code> / <code>_ga_*</code></td>
+            <td>Google Analytics — only if you accept analytics</td>
+            <td>Analytics (optional, consent-based)</td>
+            <td>Up to 2 years</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Analytics is currently not active. When enabled, IP anonymisation is applied and Google
+        acts as a processor under Art. 6(1)(a) GDPR (your consent).
+      </p>
+
+      <h2>Your rights</h2>
+      <p>Under the GDPR you have the right to:</p>
+      <ul>
+        <li>access the personal data we hold about you (Art. 15);</li>
+        <li>rectification of inaccurate data (Art. 16);</li>
+        <li>erasure (Art. 17) and restriction of processing (Art. 18);</li>
+        <li>data portability (Art. 20);</li>
+        <li>object to processing based on legitimate interests (Art. 21);</li>
+        <li>withdraw consent at any time, without affecting prior lawful processing (Art. 7).</li>
+      </ul>
+      <p>
+        To exercise any of these, email <a href={`mailto:${org.email}`}>{org.email}</a>.
+      </p>
+
+      <h2>Right to complain</h2>
+      <p>
+        You have the right to lodge a complaint with a data-protection supervisory authority
+        {brand.supervisoryAuthority ? <> — {brand.supervisoryAuthority}</> : ' in your country of residence'}.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        We may update this policy to reflect changes to the site or the law. Last updated:
+        {new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

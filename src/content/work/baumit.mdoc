@@ -1,0 +1,58 @@
+---
+title: An internal ordering system that moved €600k in five weeks
+client: Baumit
+category: Internal tools
+industry: Construction & building materials
+year: '2024'
+stack:
+  - Softr
+  - Airtable
+  - DocsAutomator
+  - Gmail
+excerpt: A budget-aware internal merchandise portal for 100+ Baumit employees — built on Softr and Airtable, where standard e-commerce and a custom-coded attempt had both failed.
+metrics:
+  - value: '100+'
+    label: employees onboarded
+  - value: '2,500+'
+    label: orders in five weeks
+  - value: €600k
+    label: merchandise ordered
+---
+
+Baumit — a leading European building-materials company — needed an internal shop where 100+ field employees could order branded workwear and equipment against individual budgets. A custom-coded attempt had proven hard to use, and off-the-shelf e-commerce couldn't handle the two things that mattered most: per-employee budgets and authenticated, employee-only access.
+
+## The problem
+
+The requirements ruled out the obvious tools. The system had to:
+
+- restrict the shop to registered employees, each with an individual budget limit;
+- give admins control to adjust budgets per user;
+- show every employee a personal dashboard of spend and orders;
+- calculate dynamically across varied packaging and product sizes;
+- generate branded PDF order summaries with custom fields (like print positions).
+
+> The combination of personalized budgets, user-specific dashboards, and admin controls proved challenging for traditional e-commerce solutions.
+
+## The approach
+
+Rather than force it into a shop platform, we built it as a no-code application on **Softr** over an **Airtable** back end — the data model the business actually needed, with a real interface on top. Access, roles and budgets became data, not custom code.
+
+## What we built
+
+- Filtered shop views so only registered employees see the shop, each scoped to their own budget.
+- A shopping cart with live budget tracking and real-time packaging and inventory calculations.
+- An admin dashboard to manage users and adjust budgets.
+- Conditional forms that render a custom view per user.
+- Branded PDF order summaries via **DocsAutomator**, delivered through Gmail.
+
+## The result
+
+The app went live and was in real use across the company within weeks.
+
+- **100+** employees onboarded
+- **2,500+** orders placed in the first five weeks
+- **€600,000** in merchandise ordered through the system
+
+The team's verdict: *"a huge improvement over what we had before — much more efficient."*
+
+This is the pattern we repeat: a clear data model, a permissioned interface, and the boring parts (auth, roles, budgets, documents) solved once and kept running.

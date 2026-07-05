@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { meta, CATEGORIES, SITE_URL } from '../../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../../lib/schema';
+
+const items = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) =>
+  a.data.year < b.data.year ? 1 : -1
+);
+
+const cats = CATEGORIES as readonly string[];
+const m = meta.work;
+
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/work`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Work', url: `${SITE_URL}/work` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/work" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">Work</p>
+      <h1 class="page-head">Built to be <em class="headline-em">used</em>.</h1>
+      <p class="page-lead" style="margin-bottom:12px">
+        Portals, internal tools and websites we've shipped — and kept running.
+      </p>
+    </div>
+  </div>
+
+  <section class="section" style="padding:64px 0 92px;border-bottom:none">
+    <div class="wrap">
+      <div class="cat-filter" role="group" aria-label="Filter by category">
+        {
+          cats.map((c) => (
+            <button
+              type="button"
+              class="cat-chip"
+              data-cat-filter={c}
+              aria-pressed={c === 'All' ? 'true' : 'false'}
+            >
+              {c}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="grid3 writing-index" data-post-grid>
+        {
+          items.map((cs) => (
+            <article class="post-item" data-cat={cs.data.category}>
+              <a class="post-card" href={`/work/${cs.id}`}>
+                <div class="post-cat">{cs.data.category}</div>
+                <h3>{cs.data.title}</h3>
+                <p class="post-excerpt">{cs.data.excerpt}</p>
+                <div class="post-meta">
+                  {cs.data.client} · {cs.data.industry} · {cs.data.year}
+                </div>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('[data-cat-filter]');
+  const items = document.querySelectorAll<HTMLElement>('.post-item');
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      const cat = chip.getAttribute('data-cat-filter');
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      items.forEach((item) => {
+        const show = cat === 'All' || item.getAttribute('data-cat') === cat;
+        item.style.display = show ? '' : 'none';
+      });
+    })
+  );
+</script>

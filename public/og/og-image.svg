@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Social share image">
+  <rect width="1200" height="630" fill="#0C0C0D"/>
+  <g transform="translate(80,80) scale(0.42)">
+    <path fill="#E0894A" d="M81 173H18.7547C8.40338 173 0 164.7 0 154.477L0 93L81 93L81 173Z"/>
+    <path fill="#E0894A" d="M81 80L0 80L0 18.5232C0 8.29963 8.40338 0 18.7547 0L81 0L81 80Z"/>
+    <path fill="#E0894A" d="M90 0H152.245C162.597 0 171 8.29963 171 18.5231V61.4768C171 71.7004 162.597 80 152.245 80H90V0Z"/>
+    <path fill="#E0894A" d="M90 93H143V158.043C143 166.297 136.189 173 127.803 173H90V93Z"/>
+  </g>
+  <text x="80" y="360" fill="#EDEAE3" font-family="Georgia, serif" font-size="72" font-weight="500" letter-spacing="-2">Sam Rivers.</text>
+  <text x="80" y="430" fill="#928E86" font-family="system-ui, sans-serif" font-size="30">Independent advisor &amp; educator — Berlin</text>
+  <text x="80" y="560" fill="#5E5B55" font-family="system-ui, sans-serif" font-size="20" letter-spacing="2">REPLACE with a real 1200×630 export — public/og/og-image.jpg</text>
+</svg>

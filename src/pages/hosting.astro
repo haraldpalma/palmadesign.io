@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, meta, brand, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const ho = site.hosting;
+const m = meta.hosting;
+const head = ho.headline.split(ho.headlineEmphasis);
+
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/hosting`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Hosting & Care', url: `${SITE_URL}/hosting` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/hosting" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">{ho.eyebrow}</p>
+      <h1 class="page-head">{head[0]}<em class="headline-em">{ho.headlineEmphasis}</em>{head[1]}</h1>
+      <p class="page-lead">{ho.intro}</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding:80px 0">
+    <div class="wrap">
+      <h2 class="eyebrow" style="margin-bottom:44px">What's included</h2>
+      {
+        ho.points.map(
+          (p: { title: string; body: string }, i: number) => (
+            <div class="work-row" style="grid-template-columns:56px 1fr">
+              <div class="work-num">{String(i + 1).padStart(2, '0')}</div>
+              <div>
+                <h3 style="font-size:26px">{p.title}</h3>
+                <p style="max-width:560px">{p.body}</p>
+              </div>
+            </div>
+          )
+        )
+      }
+      <p class="prose-note" style="max-width:640px;margin-top:36px">{ho.note}</p>
+      <div class="mt-cta">
+        <a class="btn-primary" href="/contact">{brand.cta}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,96 @@
+---
+import Logo from './Logo.astro';
+import { NAV, SITE_NAME, brand } from '../lib/site';
+
+// Active state from the current path (section pages + their children).
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+---
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="/" class="nav-logo" aria-label={`${SITE_NAME} — home`}>
+      <Logo variant="wordmark" height={26} />
+    </a>
+
+    <div class="nav-links">
+      {
+        NAV.map((item) => (
+          <a
+            href={item.href}
+            class="nav-link"
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch color theme">
+        <span class="dot"></span>
+        <span data-theme-label>Light</span>
+      </button>
+      <a href="/contact" class="nav-cta">{brand.cta}</a>
+    </div>
+
+    <button type="button" class="nav-burger" data-menu-open aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-drawer" data-drawer aria-hidden="true">
+  <div class="nav-drawer-top">
+    <Logo variant="mark" height={26} />
+    <button type="button" class="nav-drawer-close" data-menu-close aria-label="Close menu">×</button>
+  </div>
+  <div class="nav-drawer-links">
+    {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+    <a href="/contact">Contact</a>
+  </div>
+  <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch color theme">
+    <span class="dot"></span>
+    <span data-theme-label>Light</span> mode
+  </button>
+</div>
+
+<script>
+  // --- Theme ---------------------------------------------------------------
+  const root = document.documentElement;
+  function currentTheme() {
+    return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+  function syncLabels() {
+    const next = currentTheme() === 'light' ? 'Dark' : 'Light';
+    document.querySelectorAll('[data-theme-label]').forEach((el) => (el.textContent = next));
+  }
+  function setTheme(t: string) {
+    root.setAttribute('data-theme', t);
+    try {
+      localStorage.setItem('hp-theme', t);
+    } catch {}
+    syncLabels();
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach((btn) =>
+    btn.addEventListener('click', () => setTheme(currentTheme() === 'light' ? 'dark' : 'light'))
+  );
+  syncLabels();
+
+  // --- Mobile drawer -------------------------------------------------------
+  const drawer = document.querySelector('[data-drawer]');
+  const openBtn = document.querySelector('[data-menu-open]');
+  function setMenu(open: boolean) {
+    if (!drawer) return;
+    drawer.setAttribute('data-open', String(open));
+    drawer.setAttribute('aria-hidden', String(!open));
+    openBtn?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  openBtn?.addEventListener('click', () => setMenu(true));
+  document.querySelectorAll('[data-menu-close]').forEach((b) =>
+    b.addEventListener('click', () => setMenu(false))
+  );
+  drawer?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+  });
+</script>

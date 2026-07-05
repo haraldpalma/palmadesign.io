@@ -1,0 +1,25 @@
+<!--
+  Netlify Forms detection form. Astro strips `data-netlify` from rendered
+  components, so the real /contact form isn't seen by Netlify's build scanner.
+  Files in public/ are copied verbatim, so this static form registers the
+  "contact" form (name + all fields) at deploy. The real form on /contact then
+  submits successfully. Not linked anywhere; hidden; harmless.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Netlify form detection</title>
+  </head>
+  <body>
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <select name="interest"><option>Advisory</option></select>
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

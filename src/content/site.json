@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "home": { "title": "Palma Design — design & no-code studio, Vienna", "description": "We build client portals, internal tools and custom websites on Softr, Airtable and Claude — fast, permissioned, and built to run for years. Premium & Enterprise Softr partner in Vienna." },
+    "work": { "title": "Work — Palma Design", "description": "Selected client portals, internal tools and websites we've built and kept running — including Baumit's €600k internal ordering system." },
+    "services": { "title": "Services — Palma Design", "description": "Client portals and marketplaces, internal tools, custom Claude-built websites, WordPress-to-Softr migration, and AI integration and automation." },
+    "hosting": { "title": "Hosting & Care — Palma Design", "description": "We don't just build it and leave. Hosting, updates, monitoring and support keep your app fast and running — for a flat monthly fee." },
+    "studio": { "title": "Studio — Palma Design", "description": "A design and no-code studio led by Harald Palma — Premium & Enterprise Softr partner, 25 years of design, 80+ clients across the DACH region and worldwide." },
+    "contact": { "title": "Start a project — Palma Design", "description": "Tell us about the problem and the people who'll use it. We scope honestly and reply personally." },
+    "impressum": { "title": "Impressum — Palma Design", "description": "Legal disclosure for palmadesign.io per Austrian ECG / MedienG." },
+    "privacy": { "title": "Privacy & Cookies — Palma Design", "description": "How palmadesign.io handles personal data and cookies, your GDPR rights, and how to contact the controller." },
+    "terms": { "title": "Terms — Palma Design", "description": "The terms under which Palma Design provides its services." }
+  },
+
+  "home": {
+    "eyebrow": "Design & no-code studio — Vienna",
+    "headline": "Software your team will actually use.",
+    "headlineEmphasis": "actually",
+    "subline": "We build client portals, internal tools and custom websites on Softr, Airtable and Claude — fast, permissioned, and built to run for years. Premium & Enterprise Softr partner.",
+    "ctaPrimary": "Start a project",
+    "ctaGhost": "See the work",
+    "portraitCaption": "Vienna — 2026",
+    "proof": [
+      { "key": "Premium & Enterprise", "rest": "Softr Partner" },
+      { "key": "25+", "rest": "years design" },
+      { "key": "80+", "rest": "clients" },
+      { "key": "DACH", "rest": "& worldwide" },
+      { "key": "Vienna", "rest": "working globally" }
+    ],
+    "work": [
+      { "n": "01", "title": "Client portals & internal tools", "body": "Permissioned apps on Softr and Airtable — portals, marketplaces, internal tools, job boards. The data model your business needs, with an interface people open every day.", "action": "See services", "page": "services" },
+      { "n": "02", "title": "Custom websites, built with Claude", "body": "Fast static websites — like this one — engineered to be found by Google and quoted by AI assistants. No bloat, no page-builder tax.", "action": "See services", "page": "services" },
+      { "n": "03", "title": "Migration & AI automation", "body": "WordPress-to-Softr migrations, plus the automations and AI integrations that wire the boring parts together — where they actually earn their place.", "action": "See services", "page": "services" }
+    ],
+    "quote": "Most software fails because nobody uses it. We build the version people open every day.",
+    "quoteEmphasis": "uses"
+  },
+
+  "services": {
+    "eyebrow": "Services",
+    "headline": "What we build.",
+    "headlineEmphasis": "build",
+    "intro": "One studio, four kinds of work — all built to be used, and all built to last. We start from the problem and the people who'll use it, then reach for the tool that earns its place.",
+    "offerings": [
+      { "title": "Client portals & marketplaces", "body": "Authenticated portals, marketplaces and member sites on Softr + Airtable — roles, permissions and dashboards solved once and kept solved." },
+      { "title": "Internal tools & workflow apps", "body": "The app that replaces the spreadsheet: ordering systems, intranets, project trackers, knowledge bases. Fast to ship, easy to change." },
+      { "title": "Custom websites, built with Claude", "body": "Static, high-performance marketing and content sites — engineered for search and AI search from the first line of HTML." },
+      { "title": "WordPress → Softr migration", "body": "Move off a heavy WordPress stack onto something faster and cheaper to run, without losing your content or your SEO." },
+      { "title": "AI integration & automation", "body": "Make, REST APIs and AI wired into your workflow to remove steps nobody enjoys — measured against real outcomes, not novelty." }
+    ],
+    "notes": [
+      "Projects start at around €3,000. We scope honestly: if a smaller build or an off-the-shelf tool serves you better, we'll say so.",
+      "Supported data sources include Airtable, Softr Databases, Google Sheets, Supabase, Xano, SmartSuite and any REST API."
+    ]
+  },
+
+  "hosting": {
+    "eyebrow": "Hosting & Care",
+    "headline": "Built, then kept running.",
+    "headlineEmphasis": "kept",
+    "intro": "Software isn't done when it ships — it's done when it's still fast, secure and useful a year later. Hosting & Care keeps your app that way, for a flat monthly fee, so you never think about infrastructure.",
+    "points": [
+      { "title": "Hosting & uptime", "body": "Fast global hosting, HTTPS, backups and monitoring. If something breaks, we see it before you do." },
+      { "title": "Updates & small changes", "body": "Content updates, tweaks and small feature changes handled without a new project every time." },
+      { "title": "Support & training", "body": "A direct line for your team, plus training so the people who use the app can run it confidently." }
+    ],
+    "note": "Clean handoff, always: if you ever want to take the site or app in-house, it transfers to your own accounts — no lock-in."
+  },
+
+  "studio": {
+    "eyebrow": "Studio",
+    "headline": "One studio. Two decades of shipping.",
+    "headlineEmphasis": "shipping",
+    "body": [
+      "Palma Design is led by Harald Palma — one of the few Premium & Enterprise Softr partners in the DACH region, and among Softr's top partners worldwide. Twenty-five years of design, 80+ clients globally, a registered and insured company.",
+      "We work in no-code and low-code — Softr, Airtable, Make, REST APIs — and drop to custom CSS and JavaScript when a project needs it. The tools change; the discipline doesn't: start from the problem, respect the constraints, and build the thing people will actually use."
+    ],
+    "facts": [
+      { "value": "25+", "label": "years of design" },
+      { "value": "80+", "label": "clients worldwide" },
+      { "value": "Premium & Enterprise", "label": "Softr Partner" },
+      { "value": "EN · DE · ES", "label": "languages" }
+    ],
+    "principles": [
+      { "title": "Built to be used", "body": "An app nobody opens is a cost, not an asset. Usability is the whole point, not a finishing touch." },
+      { "title": "Own the boring parts", "body": "Auth, roles, budgets, documents — we solve them once so you never re-solve them." },
+      { "title": "No lock-in", "body": "Clean data models and a clean handoff. If you leave, you take everything with you." }
+    ]
+  },
+
+  "contact": {
+    "eyebrow": "Start a project",
+    "headline": "Tell us what you need built.",
+    "headlineEmphasis": "built",
+    "intro": "The problem, roughly who'll use it, and any deadline you're working to. We scope honestly and reply personally.",
+    "email": "hello@palmadesign.io"
+  },
+
+  "faqs": [
+    { "q": "What does Palma Design do?", "a": "We're a design and no-code studio in Vienna. We build client portals, internal tools and custom websites on Softr, Airtable and Claude — and keep them running through Hosting & Care." },
+    { "q": "What do you build on?", "a": "Mainly Softr and Airtable for apps and portals, and static site tooling (built with Claude) for websites. We connect Make, REST APIs, Supabase, Xano and more, and add custom CSS/JavaScript when a project needs it." },
+    { "q": "How much does a project cost?", "a": "Projects start at around €3,000, depending on scope. We scope honestly up front — if a smaller build serves you better, we'll tell you." },
+    { "q": "Do you host and maintain what you build?", "a": "Yes. Hosting & Care is a flat monthly fee covering hosting, updates, monitoring, support and training — with a clean handoff if you ever want to bring it in-house." },
+    { "q": "Where are you based, and who do you work with?", "a": "Vienna — working across the DACH region and worldwide, in English, German and Spanish. Most work runs remotely; on-site where it makes sense." }
+  ],
+
+  "footer": {
+    "lead": "Got a portal, internal tool or website that needs building? Let's scope it."
+  }
+}
