@@ -229,14 +229,12 @@ em.ember,
 .nav-cta {
   display: inline-flex;
   align-items: center;
-  height: 42px;
-  padding: 0 22px;
+  height: 44px;
+  padding: 0 24px;
   border: 1px solid var(--text);
   border-radius: var(--pill);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 400;
   color: var(--text);
   text-decoration: none;
   transition: background var(--ease), color var(--ease);
@@ -800,7 +798,7 @@ a.work-row:hover {
   font-family: var(--font-serif);
   font-size: 46px;
   letter-spacing: -0.02em;
-  color: var(--ember);
+  color: var(--text);
   line-height: 1;
 }
 .metric-label {
@@ -841,7 +839,7 @@ a.work-row:hover {
   font-family: var(--font-serif);
   font-size: 34px;
   letter-spacing: -0.02em;
-  color: var(--ember);
+  color: var(--text);
   line-height: 1;
 }
 .fact-label {
@@ -1377,7 +1375,7 @@ a.work-row:hover {
 }
 .workrow.rev .work-media { order: 2; }
 .work-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.work-num { font-family: var(--font-serif); font-size: 34px; color: var(--muted); }
+.work-num { font-family: var(--font-serif); font-size: 46px; color: var(--faint); line-height: 1; }
 .work-title {
   font-size: clamp(32px, 3.4vw, 48px);
   font-weight: 400;

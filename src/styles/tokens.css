@@ -55,8 +55,8 @@
   --canvas: #f1f0f0; /* warm off-white page */
   --surface: #ffffff; /* light raised surface */
   --text: #232325; /* near-black ink */
-  --muted: #707070; /* supporting text */
-  --faint: #a2a2a2; /* captions / meta / disabled */
+  --muted: #5f5f5f; /* supporting text (AA on light) */
+  --faint: #6a6a6a; /* captions / meta (AA on light) */
   --line: #dfdfdf; /* hairline */
   --ember: #fdd700; /* THE accent — yellow */
   --btnink: #232325; /* ink on the yellow button */
