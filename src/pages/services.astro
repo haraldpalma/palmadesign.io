@@ -8,15 +8,22 @@ const s = site.services;
 const m = meta.services;
 const head = s.headline.split(s.headlineEmphasis);
 
-// Project screenshots for the overlapping showcase row (editable in Keystatic:
-// Singletons → "Services — showcase images"). Normalise so a bare Keystatic
-// filename and a full public path both resolve; cap at four.
+// Project screenshots for the showcase (editable in Keystatic: Singletons →
+// "Services — showcase images"). Normalise so a bare Keystatic filename and a
+// full public path both resolve. Three cards; each gets a fan preset — the
+// clustered offset/rotation it animates FROM as you scroll (see .showcase CSS).
+const FAN = [
+  { cx: '250px', cy: '18px', rot: '-10deg', z: 2 },
+  { cx: '0px', cy: '-10px', rot: '4deg', z: 3 },
+  { cx: '-250px', cy: '22px', rot: '10deg', z: 1 },
+];
 const shots = (showcase.images ?? [])
   .filter((i: { src?: string }) => i && i.src)
-  .slice(0, 4)
-  .map((i: { src: string; alt?: string }) => ({
+  .slice(0, 3)
+  .map((i: { src: string; alt?: string }, idx: number) => ({
     src: /^(https?:)?\//.test(i.src) ? i.src : `/images/showcase/${i.src}`,
     alt: i.alt ?? '',
+    ...FAN[idx],
   }));
 
 const service = {
@@ -59,14 +66,12 @@ const jsonLd = graph(
         shots.length > 0 && (
           <div class="showcase" data-showcase aria-label="Selected project screenshots">
             <div class="showcase-row">
-              {shots.map((shot, i) => (
+              {shots.map((shot) => (
                 <figure
                   class="showcase-item"
-                  style={`--i:${i};--conv:${(1.5 - i) * 56}px`}
+                  style={`--cx:${shot.cx};--cy:${shot.cy};--rot:${shot.rot};z-index:${shot.z}`}
                 >
-                  <div class="showcase-shot">
-                    <img src={shot.src} alt={shot.alt} loading="lazy" width="800" height="500" />
-                  </div>
+                  <img src={shot.src} alt={shot.alt} loading="lazy" width="800" height="500" />
                 </figure>
               ))}
             </div>
@@ -94,46 +99,47 @@ const jsonLd = graph(
 </BaseLayout>
 
 <script>
-  // Reveal the showcase when it scrolls into view: images spread from an
-  // overlapped cluster into a straight row (staggered). Then a very light
-  // parallax keeps them alive as you keep scrolling. No-JS = static row;
-  // reduced-motion = no animation.
+  // Scrubbed cluster → stretch. --t (0..1) is driven by scroll: at 0 the three
+  // screenshots sit as a fanned, overlapping deck; at 1 they've straightened
+  // into a spaced row. Scrolling back up re-clusters them. The per-card offset
+  // and rotation live in inline --cx/--cy/--rot; the CSS lerps them by (1 - t).
+  // No-JS = the resting row (t defaults to 0 → fanned, still legible);
+  // reduced-motion = pinned to the spread row.
   const el = document.querySelector<HTMLElement>('[data-showcase]');
   if (el) {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
-      el.classList.add('in');
+      el.style.setProperty('--t', '1');
     } else {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              el.classList.add('in');
-              io.disconnect();
-            }
-          });
-        },
-        { threshold: 0.3 }
-      );
-      io.observe(el);
-
-      const items = Array.from(el.querySelectorAll<HTMLElement>('.showcase-shot'));
-      let ticking = false;
-      const onScroll = () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const r = el.getBoundingClientRect();
-          // progress: -1 (below viewport) → 1 (above), 0 when centred
-          const p = (window.innerHeight / 2 - (r.top + r.height / 2)) / window.innerHeight;
-          items.forEach((it, i) => {
-            it.style.setProperty('--px', `${(i - 1.5) * p * 14}px`);
-          });
-          ticking = false;
-        });
+      let startScroll = 0;
+      let range = 380;
+      const measure = () => {
+        const vh = window.innerHeight;
+        const docTop = el.getBoundingClientRect().top + window.scrollY;
+        // Start clustered when the deck is first on screen, finish within ~half
+        // a viewport of scrolling.
+        startScroll = Math.max(0, docTop - vh * 0.8);
+        range = Math.max(280, Math.min(460, vh * 0.55));
       };
+      let ticking = false;
+      const update = () => {
+        const t = Math.min(1, Math.max(0, (window.scrollY - startScroll) / range));
+        el.style.setProperty('--t', String(t));
+        ticking = false;
+      };
+      const onScroll = () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      };
+      measure();
+      update();
       window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      window.addEventListener('resize', () => {
+        measure();
+        update();
+      }, { passive: true });
     }
   }
 </script>

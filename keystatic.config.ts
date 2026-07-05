@@ -29,7 +29,8 @@ export default config({
           }),
           {
             label: 'Screenshots',
-            description: 'Four project screenshots shown as an overlapping row on the Services page.',
+            description:
+              'Three project screenshots shown as a fanned deck that stretches into a row on the Services page.',
             itemLabel: (p) => p.fields.alt.value || 'Screenshot',
           }
         ),

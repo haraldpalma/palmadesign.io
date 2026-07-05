@@ -379,56 +379,46 @@ main {
   border: 1px solid #232325;
 }
 
-/* ---- Services showcase — overlapping project screenshots ------------------ */
+/* ---- Services showcase — a fanned deck that stretches out on scroll -------
+   Flat: thin stroke, no shadow. --t (0..1, set from JS by scroll position)
+   lerps each card from its clustered fan (--cx/--cy/--rot, inline) to the
+   resting spaced row. --k scales the clustered offset up on wider screens. */
 .showcase {
   position: relative;
   z-index: 3;
-  margin: 20px 0 56px;
+  margin: clamp(28px, 5vw, 60px) 0 clamp(40px, 6vw, 72px);
+  --k: 0.32;
+}
+@media (min-width: 600px) {
+  .showcase {
+    --k: 0.62;
+  }
 }
 @media (min-width: 900px) {
-  /* Lift the row up so the screenshots straddle the dark header band. */
   .showcase {
-    margin: -96px 0 72px;
-  }
-  .showcase-item {
-    margin-left: -34px;
+    --k: 1;
   }
 }
 .showcase-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
+  gap: clamp(10px, 2.4vw, 40px);
 }
 .showcase-item {
+  position: relative;
   flex: 0 0 auto;
-  width: clamp(92px, 22vw, 320px);
-  /* Resting state: a straight row with a slight overlap (tighter on phones). */
-  margin-left: -20px;
-  /* Start clustered + hidden; .in releases to the resting position. */
-  opacity: 0;
-  transform: translateX(var(--conv, 0)) translateY(26px) scale(0.96);
-  transition:
-    opacity 0.7s ease,
-    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-  transition-delay: calc(var(--i, 0) * 0.09s);
-}
-.showcase-item:first-child {
-  margin-left: 0;
-}
-.showcase.in .showcase-item {
-  opacity: 1;
-  transform: none;
-}
-.showcase-shot {
+  width: clamp(96px, 26vw, 320px);
+  margin: 0;
+  background: #fff;
+  border: 1px solid rgba(20, 20, 35, 0.16);
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
-  border: 1px solid rgba(20, 20, 35, 0.1);
-  box-shadow: 0 26px 60px -18px rgba(15, 15, 25, 0.5);
-  /* Light scroll parallax set from JS. */
-  transform: translateX(var(--px, 0));
-  transition: transform 0.15s linear;
+  transform:
+    translateX(calc(var(--cx, 0px) * var(--k) * (1 - var(--t, 0))))
+    translateY(calc(var(--cy, 0px) * var(--k) * (1 - var(--t, 0))))
+    rotate(calc(var(--rot, 0deg) * (1 - var(--t, 0))));
+  will-change: transform;
 }
 .showcase-item img {
   display: block;
