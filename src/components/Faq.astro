@@ -1,0 +1,27 @@
+---
+import { site } from '../lib/site';
+
+interface Props {
+  title?: string;
+  items?: { q: string; a: string }[];
+}
+const { title = 'Questions, answered', items = site.faqs } = Astro.props;
+---
+<section class="section faq-section">
+  <div class="wrap">
+    <h2 class="faq-title">{title}</h2>
+    <div class="faq">
+      {
+        items.map((f: { q: string; a: string }) => (
+          <details>
+            <summary>
+              <span>{f.q}</span>
+              <span class="plus" aria-hidden="true">+</span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

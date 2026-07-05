@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Faq from '../components/Faq.astro';
 import { site, meta, brand, SITE_URL } from '../lib/site';
-import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+import { graph, webPageNode, breadcrumbNode, faqNode } from '../lib/schema';
 import showcase from '../content/settings/services-showcase.json';
 
 const s = site.services;
@@ -47,7 +48,8 @@ const jsonLd = graph(
     { name: 'Home', url: `${SITE_URL}/` },
     { name: 'Services', url: `${SITE_URL}/services` },
   ]),
-  service
+  service,
+  faqNode(site.faqs)
 );
 ---
 <BaseLayout title={m.title} description={m.description} path="/services" jsonLd={jsonLd}>
@@ -80,10 +82,16 @@ const jsonLd = graph(
       }
       <div class="block-list">
         {
-          s.offerings.map((o: { title: string; body: string }) => (
+          s.offerings.map((o: { title: string; body: string; more?: string }) => (
             <div>
               <h3>{o.title}</h3>
               <p>{o.body}</p>
+              {o.more && (
+                <details class="readmore">
+                  <summary>Read more</summary>
+                  <p>{o.more}</p>
+                </details>
+              )}
             </div>
           ))
         }
@@ -96,6 +104,8 @@ const jsonLd = graph(
       </div>
     </div>
   </section>
+
+  <Faq />
 </BaseLayout>
 
 <script>

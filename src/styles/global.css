@@ -352,7 +352,7 @@ main {
 .page-head {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: clamp(46px, 7.5vw, 108px);
+  font-size: clamp(46px, 8.2vw, 118px);
   line-height: 1;
   letter-spacing: -0.02em;
   color: #fff;
@@ -426,6 +426,72 @@ main {
   height: auto;
   aspect-ratio: 8 / 5;
   object-fit: cover;
+}
+/* Below desktop: no fan/scrub — cards stack underneath each other, full width. */
+@media (max-width: 899px) {
+  .showcase {
+    margin: clamp(20px, 5vw, 40px) 0 clamp(28px, 6vw, 48px);
+  }
+  .showcase-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .showcase-item {
+    width: min(400px, 90%);
+    transform: none !important;
+  }
+}
+
+/* ---- "Read more" inline expander (service offerings) --------------------- */
+.readmore {
+  margin-top: 10px;
+}
+.readmore > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  border-bottom: 1px solid var(--faint);
+  padding-bottom: 1px;
+  width: max-content;
+  transition: color var(--ease);
+}
+.readmore > summary::-webkit-details-marker {
+  display: none;
+}
+.readmore > summary::after {
+  content: '+';
+  color: var(--ember);
+  font-weight: 700;
+}
+.readmore[open] > summary::after {
+  content: '–';
+}
+.readmore > summary:hover {
+  color: var(--ember);
+}
+.readmore p {
+  font-size: var(--reading);
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 14px 0 0;
+  max-width: 640px;
+}
+
+/* ---- FAQ section heading ------------------------------------------------- */
+.faq-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(30px, 3.4vw, 44px);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 clamp(24px, 3vw, 40px);
 }
 
 /* ---- Hero (home) -------------------------------------------------------- */

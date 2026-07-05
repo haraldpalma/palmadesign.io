@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Faq from '../components/Faq.astro';
 import { site, meta, brand, SITE_URL } from '../lib/site';
 import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
 
@@ -47,4 +48,6 @@ const jsonLd = graph(
       </div>
     </div>
   </section>
+
+  <Faq />
 </BaseLayout>
