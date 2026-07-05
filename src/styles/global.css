@@ -371,6 +371,13 @@ main {
   max-width: 620px;
   margin: 0;
 }
+/* Header CTA — yellow pill with the black hairline border from the Figma. */
+.page-cta {
+  margin-top: clamp(26px, 3vw, 36px);
+}
+.page-cta .btn-yellow {
+  border: 1px solid #232325;
+}
 
 /* ---- Hero (home) -------------------------------------------------------- */
 .hero-header {
