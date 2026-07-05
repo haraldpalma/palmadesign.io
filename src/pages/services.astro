@@ -115,9 +115,9 @@ const jsonLd = graph(
   // and rotation live in inline --cx/--cy/--rot; the CSS lerps them by (1 - t).
   // No-JS = the resting row (t defaults to 0 → fanned, still legible);
   // reduced-motion = pinned to the spread row.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const el = document.querySelector<HTMLElement>('[data-showcase]');
   if (el) {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
       el.style.setProperty('--t', '1');
     } else {
@@ -151,5 +151,23 @@ const jsonLd = graph(
         update();
       }, { passive: true });
     }
+  }
+
+  // Mobile (stacked cards): gentle micro-reveal as each scrolls into view.
+  // No-op visually on desktop (the .revealed styles only exist below 900px).
+  const cards = document.querySelectorAll<HTMLElement>('.showcase-item');
+  if (cards.length && !reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -6% 0px' }
+    );
+    cards.forEach((c) => io.observe(c));
   }
 </script>

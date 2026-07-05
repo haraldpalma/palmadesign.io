@@ -40,6 +40,7 @@ const {
     <!-- No-flash theme: resolve persisted theme before first paint (default light). -->
     <script is:inline>
       (function () {
+        document.documentElement.classList.add('js');
         try {
           var t = localStorage.getItem('pd-theme');
           if (t !== 'light' && t !== 'dark') t = 'light';
