@@ -490,7 +490,7 @@ a.work-row:hover {
   margin: 0 0 10px;
 }
 .work-row p {
-  font-size: 16px;
+  font-size: var(--reading);
   color: var(--muted);
   line-height: 1.65;
   max-width: 520px;
@@ -553,7 +553,7 @@ a.work-row:hover {
   margin: 16px 0 12px;
 }
 .post-excerpt {
-  font-size: 16px;
+  font-size: var(--reading);
   color: var(--muted);
   line-height: 1.6;
   margin: 0 0 14px;
@@ -603,13 +603,13 @@ a.work-row:hover {
   margin: 0 0 8px;
 }
 .block-list p {
-  font-size: 16px;
+  font-size: var(--reading);
   color: var(--muted);
   line-height: 1.65;
   margin: 0;
 }
 .prose-note {
-  font-size: 16px;
+  font-size: var(--reading);
   color: var(--muted);
   line-height: 1.75;
   margin: 0 0 20px;
@@ -626,7 +626,7 @@ a.work-row:hover {
   margin: 0 0 10px;
 }
 .principle p {
-  font-size: 16px;
+  font-size: var(--reading);
   color: var(--muted);
   line-height: 1.65;
   margin: 0;
@@ -668,7 +668,7 @@ a.work-row:hover {
   transform: rotate(45deg);
 }
 .faq p {
-  font-size: 16px;
+  font-size: var(--reading);
   color: var(--muted);
   line-height: 1.7;
   margin: 0 0 26px;
@@ -982,7 +982,7 @@ a.work-row:hover {
 }
 .legal p,
 .legal li {
-  font-size: 16px;
+  font-size: var(--reading);
   line-height: 1.75;
   color: var(--muted);
   margin: 0 0 14px;
@@ -994,7 +994,7 @@ a.work-row:hover {
   width: 100%;
   border-collapse: collapse;
   margin: 16px 0 24px;
-  font-size: 16px;
+  font-size: var(--reading);
 }
 .legal th,
 .legal td {
@@ -1610,7 +1610,7 @@ a.work-row:hover {
 .promo-list li {
   display: flex;
   gap: 12px;
-  font-size: 16px;
+  font-size: var(--reading);
   line-height: 1.5;
   color: var(--text);
 }

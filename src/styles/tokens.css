@@ -30,12 +30,11 @@
   font-style: italic;
   font-display: swap;
 }
-/* DM Sans — self-hosted, first-party, single variable file (all weights).
-   Used as a Google Sans-like body/UI face; Google Sans itself is Google's
-   proprietary brand font and cannot be legally embedded. */
+/* Zalando Sans SemiExpanded — self-hosted, first-party, single variable file
+   (all weights). Body/UI face; headlines stay Playfair Display. */
 @font-face {
-  font-family: 'DM Sans';
-  src: url('/fonts/DMSans-latin.woff2') format('woff2');
+  font-family: 'Zalando Sans SemiExpanded';
+  src: url('/fonts/ZalandoSans-latin.woff2') format('woff2');
   font-weight: 100 1000;
   font-style: normal;
   font-display: swap;
@@ -49,10 +48,18 @@
   --radius: 4px;
   --pill: 9999px;
 
-  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-sans: 'Zalando Sans SemiExpanded', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
+  /* Body reading size: 16px on phones, 18px from tablet/desktop up. */
+  --reading: 16px;
+
   --ease: 0.2s ease;
+}
+@media (min-width: 900px) {
+  :root {
+    --reading: 18px;
+  }
 }
 
 /* ---- Color tokens — the brand palette ------------------------------------- */
