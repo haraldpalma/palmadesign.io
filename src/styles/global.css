@@ -100,7 +100,8 @@ em.ember,
   align-items: center;
   height: 52px;
   padding: 0 30px;
-  border: none;
+  /* Black hairline so the yellow pill stays defined on the light canvas. */
+  border: 1px solid var(--btnink);
   border-radius: var(--pill);
   font-family: inherit;
   font-size: 16px;
@@ -443,23 +444,23 @@ main {
   }
 }
 
-/* ---- "Read more" inline expander (service offerings) --------------------- */
+/* ---- "Read more" expander (service offerings) — FAQ-style accordion row --- */
 .readmore {
-  margin-top: 10px;
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
 }
 .readmore > summary {
-  display: inline-flex;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
+  gap: 20px;
   list-style: none;
   cursor: pointer;
-  font-size: 15px;
+  padding: 14px 0;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.005em;
   color: var(--text);
-  border-bottom: 1px solid var(--faint);
-  padding-bottom: 1px;
-  width: max-content;
   transition: color var(--ease);
 }
 .readmore > summary::-webkit-details-marker {
@@ -467,11 +468,14 @@ main {
 }
 .readmore > summary::after {
   content: '+';
+  flex: none;
   color: var(--ember);
-  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 0.25s ease;
 }
 .readmore[open] > summary::after {
-  content: '–';
+  transform: rotate(45deg);
 }
 .readmore > summary:hover {
   color: var(--ember);
@@ -480,7 +484,7 @@ main {
   font-size: var(--reading);
   color: var(--muted);
   line-height: 1.65;
-  margin: 14px 0 0;
+  margin: 0 0 18px;
   max-width: 640px;
 }
 
