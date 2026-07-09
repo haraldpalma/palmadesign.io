@@ -1,8 +1,8 @@
 {
   "meta": {
     "home": {
-      "title": "Palma Design — design studio, Vienna. Graphics & hand-coded websites",
-      "description": "A Vienna design studio with 25 years of graphic design behind it. Logos, brand identities and print — plus fast, hand-coded websites built with AI and engineered to be found."
+      "title": "Palma Design — European design studio. Graphics & hand-coded websites",
+      "description": "A European design studio, working everywhere — 25 years of graphic design behind it. Logos, brand identities and print — plus fast, hand-coded websites built with AI and engineered to be found."
     },
     "work": {
       "title": "Work — Palma Design",
@@ -46,13 +46,13 @@
     }
   },
   "home": {
-    "eyebrow": "Design studio — Vienna",
+    "eyebrow": "European design studio — working everywhere",
     "headline": "Twenty-five years of craft. Zero templates.",
     "headlineEmphasis": "Zero templates",
-    "subline": "Palma Design is a Vienna design studio. Graphic design since the late nineties — logos, identities, print — and websites written in code with AI, engineered to be found.",
+    "subline": "Palma Design is a European design studio — at home everywhere. Graphic design since the late nineties — logos, identities, print — and websites written in code with AI, engineered to be found.",
     "ctaPrimary": "Start a project",
     "ctaGhost": "See the work",
-    "portraitCaption": "Vienna — 2026",
+    "portraitCaption": "Europe — 2026",
     "proof": [
       {
         "key": "25+",
@@ -71,8 +71,8 @@
         "rest": "& worldwide"
       },
       {
-        "key": "Vienna",
-        "rest": "working globally"
+        "key": "European",
+        "rest": "at home everywhere"
       }
     ],
     "work": [
@@ -196,7 +196,7 @@
   "faqs": [
     {
       "q": "What does Palma Design do?",
-      "a": "We're a design studio in Vienna doing two things: graphic design — logos, brand identities, print and campaign graphics — and custom websites that we design and then write in code. Twenty-five years of design behind both."
+      "a": "We're a European design studio doing two things: graphic design — logos, brand identities, print and campaign graphics — and custom websites that we design and then write in code. Twenty-five years of design behind both."
     },
     {
       "q": "How are your websites built?",
@@ -216,7 +216,7 @@
     },
     {
       "q": "Where are you based, and who do you work with?",
-      "a": "Vienna — working across the DACH region and worldwide, in English, German and Spanish. Most work runs remotely; on-site where it makes sense."
+      "a": "We're European and we work everywhere — across Europe and worldwide, in English, German and Spanish. Most work runs remotely; on-site where it makes sense."
     }
   ],
   "footer": {

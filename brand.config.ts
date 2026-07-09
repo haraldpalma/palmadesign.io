@@ -9,7 +9,7 @@ export const brand = {
   legalName: 'Harald Walter Palma',
   role: 'Design studio',
   description:
-    'Palma Design is a Vienna design studio with 25 years of graphic design behind it. We design brands, graphics and hand-coded websites — built with AI, engineered for search, and made to last.',
+    'Palma Design is a European design studio, working everywhere — 25 years of graphic design behind it. We design brands, graphics and hand-coded websites — built with AI, engineered for search, and made to last.',
 
   // ── URLs & contact ────────────────────────────────────────────────────────
   siteUrl: 'https://palmadesign.io',
