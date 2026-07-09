@@ -43,18 +43,84 @@ const jsonLd = graph(
     </div>
   </header>
 
-  <!-- PROOF -->
-  <div class="bleed">
-    <div class="wrap-wide" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px 40px;padding:32px 0;border-bottom:1px solid var(--line)">
+  <!-- PROOF (scrolling banner) -->
+  <div class="bleed proof-marquee" role="marquee" aria-label="Studio facts">
+    {
+      /* Two identical groups; the track slides -50% and loops seamlessly.
+         The second group is decoration only, so it's hidden from readers. */
+    }
+    <div class="marquee-track">
       {
-        proof.map((p) => (
-          <div style="font-size:clamp(15px,1.6vw,22px);color:var(--muted)">
-            <b style="color:var(--text);font-weight:700">{p.key}</b> {p.rest}
+        [0, 1].map((dup) => (
+          <div class="marquee-group" aria-hidden={dup === 1 ? 'true' : undefined}>
+            {proof.map((p) => (
+              <span class="marquee-item">
+                <b>{p.key}</b> {p.rest}
+                <span class="marquee-dot" aria-hidden="true" />
+              </span>
+            ))}
           </div>
         ))
       }
     </div>
   </div>
+
+  <style>
+    .proof-marquee {
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      padding: 30px 0;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: proof-scroll 32s linear infinite;
+    }
+    .proof-marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      font-size: clamp(15px, 1.6vw, 22px);
+      color: var(--muted);
+    }
+    .marquee-item b {
+      color: var(--text);
+      font-weight: 700;
+      margin-right: 0.35em;
+    }
+    .marquee-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ember);
+      margin: 0 clamp(24px, 4vw, 56px);
+    }
+    @keyframes proof-scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track {
+        animation: none;
+      }
+      .proof-marquee {
+        overflow-x: auto;
+      }
+    }
+  </style>
 
   <!-- THE STUDIO -->
   <section class="bleed agency">
