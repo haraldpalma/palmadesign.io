@@ -1,28 +1,36 @@
 {
   "meta": {
     "home": {
-      "title": "Palma Design — design & no-code studio, Vienna",
-      "description": "We build client portals, internal tools and custom websites on Softr, Airtable and Claude — fast, permissioned, and built to run for years. Premium & Enterprise Softr partner in Vienna."
+      "title": "Palma Design — European design studio. Graphics & hand-coded websites",
+      "description": "A European design studio, working everywhere — 25 years of graphic design behind it. Logos, brand identities and print — plus fast, hand-coded websites built with AI and engineered to be found."
     },
     "work": {
       "title": "Work — Palma Design",
-      "description": "Selected client portals, internal tools and websites we've built and kept running — including Baumit's €600k internal ordering system."
+      "description": "Selected websites and brand work — designed and hand-coded by the studio, including this site itself."
+    },
+    "graphics": {
+      "title": "Graphics — Palma Design",
+      "description": "Twenty-five years of graphic design: logos and marks, brand identities, print, campaigns and illustration from the Palma Design archive."
+    },
+    "journal": {
+      "title": "Journal — Palma Design",
+      "description": "Studio notes on design, websites and AI — what changes when machines can produce, and why taste still decides."
     },
     "services": {
       "title": "Services — Palma Design",
-      "description": "Client portals and marketplaces, internal tools, custom Claude-built websites, WordPress-to-Softr migration, and AI integration and automation."
+      "description": "Brand and graphic design, and custom websites designed and written in code — no templates, no page builders, built to be found by Google and AI."
     },
     "hosting": {
       "title": "Hosting & Care — Palma Design",
-      "description": "We don't just build it and leave. Hosting, updates, monitoring and support keep your app fast and running — for a flat monthly fee."
+      "description": "We don't just design it and leave. Hosting, updates, monitoring and support keep your website fast and current — for a flat monthly fee."
     },
     "studio": {
       "title": "Studio — Palma Design",
-      "description": "A design and no-code studio led by Harald Palma — Premium & Enterprise Softr partner, 25 years of design, 80+ clients across the DACH region and worldwide."
+      "description": "A design studio led by Harald Palma — 25 years of graphic design, 80+ clients across the DACH region and worldwide, now designing and building with AI."
     },
     "contact": {
       "title": "Start a project — Palma Design",
-      "description": "Tell us about the problem and the people who'll use it. We scope honestly and reply personally."
+      "description": "Tell us about the brand or website you need designed. We scope honestly and reply personally."
     },
     "impressum": {
       "title": "Impressum — Palma Design",
@@ -38,103 +46,89 @@
     }
   },
   "home": {
-    "eyebrow": "Design & no-code studio — Vienna",
-    "headline": "Software your team will actually use.",
-    "headlineEmphasis": "actually",
-    "subline": "We build client portals, internal tools and custom websites on Softr, Airtable and Claude — fast, permissioned, and built to run for years. Premium & Enterprise Softr partner.",
+    "eyebrow": "European design studio — working everywhere",
+    "headline": "Twenty-five years of craft. Zero templates.",
+    "headlineEmphasis": "Zero templates",
+    "subline": "Palma Design is a European design studio — at home everywhere. Graphic design since the late nineties — logos, identities, print — and websites written in code with AI, engineered to be found.",
     "ctaPrimary": "Start a project",
     "ctaGhost": "See the work",
-    "portraitCaption": "Vienna — 2026",
+    "portraitCaption": "Europe — 2026",
     "proof": [
       {
-        "key": "Premium & Enterprise",
-        "rest": "Softr Partner"
-      },
-      {
         "key": "25+",
-        "rest": "years design"
+        "rest": "years of design"
       },
       {
         "key": "80+",
         "rest": "clients"
       },
       {
+        "key": "Design + code",
+        "rest": "one pair of hands"
+      },
+      {
         "key": "DACH",
         "rest": "& worldwide"
       },
       {
-        "key": "Vienna",
-        "rest": "working globally"
+        "key": "European",
+        "rest": "at home everywhere"
       }
     ],
     "work": [
       {
         "n": "01",
-        "title": "Client portals & internal tools",
-        "body": "Permissioned apps on Softr and Airtable — portals, marketplaces, internal tools, job boards. The data model your business needs, with an interface people open every day.",
-        "action": "See services",
-        "page": "services"
+        "title": "Graphic design & identity",
+        "body": "Logos and marks, brand identities, print and campaign graphics — twenty-five years of visual work, from sketch to press.",
+        "action": "See the graphics",
+        "page": "graphics"
       },
       {
         "n": "02",
-        "title": "Custom websites, built with Claude",
-        "body": "Fast static websites — like this one — engineered to be found by Google and quoted by AI assistants. No bloat, no page-builder tax.",
+        "title": "Websites, written in code",
+        "body": "Designed in the studio, hand-coded with Claude — like this one. Fast static sites engineered to be found by Google and quoted by AI assistants. No page-builder tax.",
         "action": "See services",
         "page": "services"
       },
       {
         "n": "03",
-        "title": "Migration & AI automation",
-        "body": "WordPress-to-Softr migrations, plus the automations and AI integrations that wire the boring parts together — where they actually earn their place.",
-        "action": "See services",
-        "page": "services"
+        "title": "Design in the age of AI",
+        "body": "AI collapsed the cost of producing design. It didn't produce taste. The journal is where we work out what that means — for the craft and for the people who buy it.",
+        "action": "Read the journal",
+        "page": "journal"
       }
     ],
-    "quote": "Most software fails because nobody uses it. We build the version people open every day.",
-    "quoteEmphasis": "uses"
+    "quote": "AI made producing design cheap. It made knowing what's good expensive.",
+    "quoteEmphasis": "knowing what's good"
   },
   "services": {
     "eyebrow": "Services",
-    "headline": "What we build.",
-    "headlineEmphasis": "build",
-    "intro": "One studio, four kinds of work — all built to be used, and all built to last. We start from the problem and the people who'll use it, then reach for the tool that earns its place.",
+    "headline": "What we design.",
+    "headlineEmphasis": "design",
+    "intro": "One studio, two crafts: the visual work a brand is made of, and websites designed and written in code. Both from the same pair of hands, so nothing gets lost between the designer and the developer.",
     "offerings": [
       {
-        "title": "Client portals & marketplaces",
-        "body": "Authenticated portals, marketplaces and member sites on Softr + Airtable — roles, permissions and dashboards solved once and kept solved.",
-        "more": "Typical builds: customer and partner logins, gated content, member directories and dashboards. Data lives in Airtable, so your team edits it directly — no developer needed to change a price or add a user."
+        "title": "Brand & graphic design",
+        "body": "Logos and marks, full brand identities, print and campaign graphics — grounded in twenty-five years of shipped work, not mood boards.",
+        "more": "Typical projects: a logo and the system around it (type, color, usage), print pieces that still have to survive a press check, and campaign graphics with one clear idea. You get final artwork plus the source files — everything is yours."
       },
       {
-        "title": "Internal tools & workflow apps",
-        "body": "The app that replaces the spreadsheet: ordering systems, intranets, project trackers, knowledge bases. Fast to ship, easy to change.",
-        "more": "The kind of process that outgrew a spreadsheet but doesn't justify custom software: ordering systems, intranets, project trackers and knowledge bases — shipped in weeks, not quarters."
-      },
-      {
-        "title": "Custom websites, built with Claude",
-        "body": "Static, high-performance marketing and content sites — engineered for search and AI search from the first line of HTML.",
-        "more": "Static, hand-built with Claude for speed and clean markup that Google and AI assistants can actually read. It's the same SEO/LLM setup running behind this very site."
-      },
-      {
-        "title": "WordPress → Softr migration",
-        "body": "Move off a heavy WordPress stack onto something faster and cheaper to run, without losing your content or your SEO.",
-        "more": "We map your content and data, rebuild it on Softr, and cut the plugin sprawl, hosting bills and constant maintenance that a heavy WordPress stack drags along."
-      },
-      {
-        "title": "AI integration & automation",
-        "body": "Make, REST APIs and AI wired into your workflow to remove steps nobody enjoys — measured against real outcomes, not novelty.",
-        "more": "We connect your tools with Make and REST APIs and drop AI in where it removes real steps — invoicing, routing, summaries — not for novelty."
+        "title": "Websites, designed & hand-coded",
+        "body": "Static, high-performance sites — designed in the studio and written in code with Claude. Engineered for search and AI search from the first line of HTML.",
+        "more": "No WordPress, no page builders, no plugin sprawl. Clean HTML that Google and AI assistants can actually read, full SEO and schema layer, and an editing interface so you can change your own content. It's the exact setup running behind this very site."
       }
     ],
     "notes": [
-      "Projects start at around €3,000. We scope honestly: if a smaller build or an off-the-shelf tool serves you better, we'll say so.",
-      "Supported data sources include Airtable, Softr Databases, Google Sheets, Supabase, Xano, SmartSuite and any REST API."
+      "Websites start at around €3,000; design work is scoped per brief. We scope honestly: if a smaller piece serves you better, we'll say so.",
+      "Every website comes with optional Hosting & Care — hosting, updates and support for a flat monthly fee.",
+      "Need a client portal or internal tool instead? That's our dedicated app practice: softrexperts.com."
     ]
   },
   "hosting": {
     "eyebrow": "Hosting & Care",
-    "headline": "Built, then kept running.",
+    "headline": "Designed, then kept running.",
     "headlineEmphasis": "kept",
-    "intro": "Software isn't done when it ships — it's done when it's still fast, secure and useful a year later. Hosting & Care keeps your app that way, for a flat monthly fee, so you never think about infrastructure.",
+    "intro": "A website isn't done when it ships — it's done when it's still fast, secure and current a year later. Hosting & Care keeps your site that way, for a flat monthly fee, so you never think about infrastructure.",
     "points": [
       {
         "title": "Hosting & uptime",
@@ -142,22 +136,22 @@
       },
       {
         "title": "Updates & small changes",
-        "body": "Content updates, tweaks and small feature changes handled without a new project every time."
+        "body": "Content updates, design tweaks and small changes handled without a new project every time."
       },
       {
         "title": "Support & training",
-        "body": "A direct line for your team, plus training so the people who use the app can run it confidently."
+        "body": "A direct line to the studio, plus training so you can edit your own content confidently."
       }
     ],
-    "note": "Clean handoff, always: if you ever want to take the site or app in-house, it transfers to your own accounts — no lock-in."
+    "note": "Clean handoff, always: if you ever want to take the site in-house, it transfers to your own accounts — code, content and design files included. No lock-in."
   },
   "studio": {
     "eyebrow": "Studio",
-    "headline": "One studio. Two decades of shipping.",
-    "headlineEmphasis": "shipping",
+    "headline": "One designer. Three decades of tools.",
+    "headlineEmphasis": "tools",
     "body": [
-      "Palma Design is led by Harald Palma — one of the few Premium & Enterprise Softr partners in the DACH region, and among Softr's top partners worldwide. Twenty-five years of design, 80+ clients globally, a registered and insured company.",
-      "We work in no-code and low-code — Softr, Airtable, Make, REST APIs — and drop to custom CSS and JavaScript when a project needs it. The tools change; the discipline doesn't: start from the problem, respect the constraints, and build the thing people will actually use."
+      "Palma Design is led by Harald Palma — twenty-five years of graphic design, 80+ clients across the DACH region and worldwide. The tools kept changing: drawing boards, repro film, desktop publishing, the web, and now AI. The craft underneath never did.",
+      "Today the studio does two things: the visual work a brand is made of, and websites designed and then written in code with Claude. Same eye on both, so the identity and the site that carries it are never designed by different people."
     ],
     "facts": [
       {
@@ -169,8 +163,8 @@
         "label": "clients worldwide"
       },
       {
-        "value": "Premium & Enterprise",
-        "label": "Softr Partner"
+        "value": "Print → web → AI",
+        "label": "one continuous craft"
       },
       {
         "value": "EN · DE · ES",
@@ -179,49 +173,53 @@
     ],
     "principles": [
       {
-        "title": "Built to be used",
-        "body": "An app nobody opens is a cost, not an asset. Usability is the whole point, not a finishing touch."
+        "title": "Taste over trend",
+        "body": "Trends expire; hierarchy, type and one clear idea don't. We design things you won't need to redesign in two years."
       },
       {
-        "title": "Own the boring parts",
-        "body": "Auth, roles, budgets, documents — we solve them once so you never re-solve them."
+        "title": "Design and code, one pair of hands",
+        "body": "The person who designs the site writes it. Nothing gets lost in a handoff, because there isn't one."
       },
       {
-        "title": "No lock-in",
-        "body": "Clean data models and a clean handoff. If you leave, you take everything with you."
+        "title": "No templates, no lock-in",
+        "body": "Every piece starts from your brief, not a theme. And everything we make — artwork, source files, code — is yours to keep."
       }
     ]
   },
   "contact": {
     "eyebrow": "Start a project",
-    "headline": "Tell us what you need built.",
-    "headlineEmphasis": "built",
-    "intro": "The problem, roughly who'll use it, and any deadline you're working to. We scope honestly and reply personally.",
+    "headline": "Tell us what needs designing.",
+    "headlineEmphasis": "designing",
+    "intro": "A brand, a piece of print, a website — tell us roughly what it's for and any deadline you're working to. We scope honestly and reply personally.",
     "email": "hello@palmadesign.io"
   },
   "faqs": [
     {
       "q": "What does Palma Design do?",
-      "a": "We're a design and no-code studio in Vienna. We build client portals, internal tools and custom websites on Softr, Airtable and Claude — and keep them running through Hosting & Care."
+      "a": "We're a European design studio doing two things: graphic design — logos, brand identities, print and campaign graphics — and custom websites that we design and then write in code. Twenty-five years of design behind both."
     },
     {
-      "q": "What do you build on?",
-      "a": "Mainly Softr and Airtable for apps and portals, and static site tooling (built with Claude) for websites. We connect Make, REST APIs, Supabase, Xano and more, and add custom CSS/JavaScript when a project needs it."
+      "q": "How are your websites built?",
+      "a": "Designed in the studio, then hand-coded as fast static sites with Claude — no WordPress, no page builders, no templates. Clean HTML with a full SEO and schema layer, engineered to be found by Google and read by AI assistants. This site runs on exactly that setup."
     },
     {
       "q": "How much does a project cost?",
-      "a": "Projects start at around €3,000, depending on scope. We scope honestly up front — if a smaller build serves you better, we'll tell you."
+      "a": "Websites start at around €3,000; graphic design is scoped per brief. We scope honestly up front — if a smaller piece serves you better, we'll tell you."
     },
     {
-      "q": "Do you host and maintain what you build?",
-      "a": "Yes. Hosting & Care is a flat monthly fee covering hosting, updates, monitoring, support and training — with a clean handoff if you ever want to bring it in-house."
+      "q": "Do you host and maintain the websites you build?",
+      "a": "Yes. Hosting & Care is a flat monthly fee covering hosting, updates, monitoring, support and training — with a clean handoff if you ever want to take the site in-house."
+    },
+    {
+      "q": "Do you also build apps, portals or internal tools?",
+      "a": "Not under this roof. App and portal work lives at softrexperts.com — our dedicated practice for that. Palma Design is the design studio: graphics, brands and coded websites."
     },
     {
       "q": "Where are you based, and who do you work with?",
-      "a": "Vienna — working across the DACH region and worldwide, in English, German and Spanish. Most work runs remotely; on-site where it makes sense."
+      "a": "We're European and we work everywhere — across Europe and worldwide, in English, German and Spanish. Most work runs remotely; on-site where it makes sense."
     }
   ],
   "footer": {
-    "lead": "Got a portal, internal tool or website that needs building? Let's scope it."
+    "lead": "Got a brand, a graphic or a website that needs a designer? Let's talk."
   }
 }

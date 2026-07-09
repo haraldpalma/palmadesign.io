@@ -1,0 +1,47 @@
+---
+title: Designing websites for Google — and for the AI that answers instead
+excerpt: Search is splitting in two - classic Google results and AI assistants that read, summarize and quote the web. Both reward the same thing - a fast site with clean, legible HTML. Here's what "designed to be found" means in 2026, in plain language.
+date: '2026-07-30'
+category: AI
+draft: true
+---
+
+For twenty years, "being found online" meant one thing: rank on Google. That era isn't over — but it now has a twin. A growing share of your customers never see a results page at all. They ask an AI assistant, and the assistant reads the web, forms an answer, and *quotes its sources*. Your website is either quotable or it's invisible.
+
+Here's the good news that surprises most clients: you don't need two strategies. Google's crawler and the AI assistants reward mostly the same underlying qualities. The bad news: most websites — especially page-builder websites — have none of them.
+
+## What both audiences want
+
+Strip away the jargon and both Google and the AI systems are readers with no patience. They want:
+
+- **Speed.** A slow site gets crawled less, ranked lower, and abandoned by humans. Static, hand-coded pages are effectively instant, because the page exists as a finished document before anyone asks for it.
+- **Legible structure.** Machines don't *look* at your site; they read the HTML. If your headings are real headings, your text is real text, and the document's structure mirrors its meaning, a machine can lift the answer straight out of it. If your content is trapped in a soup of generated wrappers — or worse, only appears after JavaScript runs — you're asking the reader to do work it will often decline to do.
+- **Answers, stated plainly.** Both Google's snippets and AI summaries favor pages that state the answer, then elaborate. It's why every case study and post on this site opens with the point instead of a warm-up paragraph.
+
+## The invisible layer most sites skip
+
+Beyond the visible page, a well-built site carries a layer of metadata written purely for machines. It's the part no one sees and everyone underestimates:
+
+- **Structured data** — a machine-readable description of who you are, what you offer, what this page is, how the FAQ questions and answers pair up. It's how you tell Google *exactly* what it's looking at instead of hoping it guesses.
+- **An llms.txt index** — a plain-text map of the site written for AI assistants, listing every page with a one-line summary. New, cheap to provide, and almost nobody does it.
+- **Markdown twins** — on this site, every article and case study also exists as a clean markdown document at the same address. An AI that wants the text gets the text, with zero chrome in the way.
+
+None of this is visible design. All of it is design — decisions about how the site presents itself to its most influential readers.
+
+## Why page builders fail this test
+
+I've made the [general case against page builders](/journal/why-we-hand-code-websites) elsewhere, but the search angle deserves its own sentence: a page builder generates markup for the convenience of the builder, not the reader. Bloated wrappers, client-side rendering, an SEO plugin bolted on top fighting the theme for control of the head tag — every layer adds noise between your content and the machine trying to read it. You can rank with a builder site. You're just running the race with a parachute on.
+
+## What this means if you're not technical
+
+You don't need to learn any of these words. You need to ask whoever builds your next site three questions:
+
+1. *Is the site static or does it render in the browser?* (You want: static.)
+2. *Will the structured data be written per page, or does a plugin guess?* (You want: per page.)
+3. *Can an AI assistant read every page as clean text?* (You want: yes — and a builder who understands the question.)
+
+The web's front door is being rebuilt in real time. The sites that walk through it aren't the prettiest ones — they're the fastest, clearest, most legible ones. Prettiness we can also do. But legibility is the part your customers will never see and always feel.
+
+---
+
+*Palma Design builds hand-coded websites — wherever you are — with the full findability layer — structured data, llms.txt, markdown twins — as standard, not as an upsell. [Ask us about yours](/contact).*

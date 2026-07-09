@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { meta, brand, SITE_URL } from '../lib/site';
+import { graph, webPageNode, breadcrumbNode } from '../lib/schema';
+
+const m = meta.graphics;
+
+const items = (await getCollection('graphics', ({ data }) => !data.draft)).sort((a, b) =>
+  a.data.year < b.data.year ? 1 : -1
+);
+// A bare Keystatic filename and a full public path both resolve.
+const src = (img: string) => (/^(https?:)?\//.test(img) ? img : `/images/graphics/${img}`);
+
+const cats = brand.graphicsCategories as readonly string[];
+
+const jsonLd = graph(
+  webPageNode({ url: `${SITE_URL}/graphics`, name: m.title, description: m.description }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Graphics', url: `${SITE_URL}/graphics` },
+  ])
+);
+---
+<BaseLayout title={m.title} description={m.description} path="/graphics" jsonLd={jsonLd}>
+  <div class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow">Graphics</p>
+      <h1 class="page-head">Twenty-five years on <em class="headline-em">paper and pixels</em>.</h1>
+      <p class="page-lead">
+        Logos and marks, brand identities, print, campaigns and illustration — selected pieces
+        from the studio archive.
+      </p>
+      <div class="page-cta"><a class="btn-yellow" href="/contact">{brand.cta} →</a></div>
+    </div>
+  </div>
+
+  <section class="section" style="padding:64px 0 92px;border-bottom:none">
+    <div class="wrap-wide">
+      <div class="cat-filter" role="group" aria-label="Filter by category">
+        {
+          cats.map((c) => (
+            <button
+              type="button"
+              class="cat-chip"
+              data-cat-filter={c}
+              aria-pressed={c === 'All' ? 'true' : 'false'}
+            >
+              {c}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="gallery" data-gallery>
+        {
+          items.map((g) => (
+            <figure class="gallery-item" data-cat={g.data.category}>
+              <img src={src(g.data.image)} alt={g.data.alt} loading="lazy" width="800" height="1000" />
+              <figcaption>
+                <div class="gallery-title">{g.data.title}</div>
+                <div class="gallery-meta">
+                  {g.data.category} · {g.data.year}{g.data.client ? ` · ${g.data.client}` : ''}
+                </div>
+                {g.data.note && <div class="gallery-note">{g.data.note}</div>}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .gallery {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px var(--gutter);
+  }
+  @media (max-width: 900px) {
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 24px;
+    }
+  }
+  @media (max-width: 560px) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+  .gallery-item {
+    margin: 0;
+  }
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--ink);
+  }
+  .gallery-title {
+    margin-top: 14px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .gallery-meta {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .gallery-note {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('[data-cat-filter]');
+  const items = document.querySelectorAll<HTMLElement>('.gallery-item');
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      const cat = chip.getAttribute('data-cat-filter');
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      items.forEach((item) => {
+        const show = cat === 'All' || item.getAttribute('data-cat') === cat;
+        item.style.display = show ? '' : 'none';
+      });
+    })
+  );
+</script>

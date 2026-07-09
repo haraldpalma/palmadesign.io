@@ -89,7 +89,7 @@ export function blogPostingNode(opts: {
   description: string;
   image?: string;
 }) {
-  const url = `${SITE_URL}/writing/${opts.slug}`;
+  const url = `${SITE_URL}/journal/${opts.slug}`;
   return {
     '@type': 'BlogPosting',
     '@id': `${url}#article`,

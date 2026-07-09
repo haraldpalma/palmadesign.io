@@ -9,7 +9,7 @@ const work = defineCollection({
     z.object({
       title: z.string(),
       client: z.string(),
-      category: z.enum(['Client portals', 'Internal tools', 'Websites', 'AI & automation']),
+      category: z.enum(['Websites', 'Brand & identity']),
       industry: z.string(),
       year: z.string(),
       stack: z.array(z.string()).default([]),
@@ -20,4 +20,40 @@ const work = defineCollection({
     }),
 });
 
-export const collections = { work };
+// Graphics gallery — image-led portfolio pieces (25 years of graphic design).
+// JSON entries edited via Keystatic; images live in public/images/graphics/.
+const graphics = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/graphics' }),
+  schema: z.object({
+    title: z.string(),
+    category: z.enum([
+      'Logos & marks',
+      'Brand identity',
+      'Print & editorial',
+      'Campaign',
+      'Illustration',
+    ]),
+    year: z.string(),
+    client: z.string().default(''),
+    image: z.string(),
+    alt: z.string(),
+    note: z.string().default(''),
+    draft: z.boolean().default(false),
+  }),
+});
+
+// Journal — studio writing on design, websites and AI. Markdoc via Keystatic.
+const journal = defineCollection({
+  loader: glob({ pattern: '**/*.mdoc', base: './src/content/journal' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      excerpt: z.string(),
+      date: z.string(), // YYYY-MM-DD
+      category: z.enum(['Design', 'Websites', 'AI', 'Studio']),
+      ogImage: image().optional(),
+      draft: z.boolean().default(false),
+    }),
+});
+
+export const collections = { work, graphics, journal };

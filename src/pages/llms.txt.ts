@@ -8,12 +8,18 @@ export const GET: APIRoute = async () => {
   const items = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) =>
     a.data.year < b.data.year ? 1 : -1
   );
+  const posts = (await getCollection('journal', ({ data }) => !data.draft)).sort((a, b) =>
+    a.data.date < b.data.date ? 1 : -1
+  );
   const m = site.meta as Record<string, { description: string }>;
   const navLines = brand.nav.map(
     (n) => `- [${n.label}](${SITE_URL}${n.href}): ${m[n.href.replace('/', '')]?.description ?? ''}`
   );
   const workLines = items.map(
     (cs) => `- [${cs.data.title}](${SITE_URL}/work/${cs.id}): ${cs.data.client} — ${cs.data.excerpt}`
+  );
+  const journalLines = posts.map(
+    (p) => `- [${p.data.title}](${SITE_URL}/journal/${p.id}): ${p.data.excerpt}`
   );
 
   const body = [
@@ -28,6 +34,9 @@ export const GET: APIRoute = async () => {
     ``,
     `## Work (each case study is also served as clean markdown at /work/<slug>.md)`,
     ...workLines,
+    ``,
+    `## Journal (each post is also served as clean markdown at /journal/<slug>.md)`,
+    ...journalLines,
     ``,
     `## Contact`,
     `- Email: ${brand.email}`,

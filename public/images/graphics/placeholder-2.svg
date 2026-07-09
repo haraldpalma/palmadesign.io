@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Placeholder artwork">
+  <rect width="800" height="1000" fill="#f2f2f4"/>
+  <rect x="120" y="140" width="260" height="260" fill="#141419"/>
+  <rect x="420" y="140" width="260" height="260" fill="#fdd700"/>
+  <rect x="120" y="440" width="560" height="260" fill="none" stroke="#141419" stroke-width="8"/>
+  <text x="400" y="880" font-family="Arial, sans-serif" font-size="30" letter-spacing="6" fill="#5f5f5f" text-anchor="middle">PLACEHOLDER — REPLACE IN /KEYSTATIC</text>
+</svg>

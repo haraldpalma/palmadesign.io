@@ -1,7 +1,16 @@
 {
   "images": [
-    { "src": "/images/showcase/shot-1.svg", "alt": "Client portal built on Softr — screenshot placeholder" },
-    { "src": "/images/showcase/shot-2.svg", "alt": "Internal tool built on Softr + Airtable — screenshot placeholder" },
-    { "src": "/images/showcase/shot-3.svg", "alt": "Marketing website — screenshot placeholder" }
+    {
+      "src": "/images/showcase/shot-1.svg",
+      "alt": "Hand-coded website design — screenshot placeholder"
+    },
+    {
+      "src": "/images/showcase/shot-2.svg",
+      "alt": "Brand identity presentation — screenshot placeholder"
+    },
+    {
+      "src": "/images/showcase/shot-3.svg",
+      "alt": "Print & campaign graphics — screenshot placeholder"
+    }
   ]
 }
