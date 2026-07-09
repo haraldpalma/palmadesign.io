@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Placeholder artwork">
+  <rect width="800" height="1000" fill="#fdd700"/>
+  <path d="M150 780 L400 220 L650 780 Z" fill="#141419"/>
+  <text x="400" y="900" font-family="Arial, sans-serif" font-size="30" letter-spacing="6" fill="#33331f" text-anchor="middle">PLACEHOLDER — REPLACE IN /KEYSTATIC</text>
+</svg>

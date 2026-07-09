@@ -37,9 +37,9 @@ export default defineConfig({
       changefreq: 'monthly',
       priority: 0.7,
       serialize(item) {
-        // Home is the priority; the writing index changes most often.
+        // Home is the priority; the journal index changes most often.
         if (item.url === `${site}/`) item.priority = 1.0;
-        if (item.url === `${site}/writing`) item.changefreq = 'weekly';
+        if (item.url === `${site}/journal`) item.changefreq = 'weekly';
         return item;
       },
     }),

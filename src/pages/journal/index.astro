@@ -1,34 +1,36 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { meta, CATEGORIES, SITE_URL } from '../../lib/site';
+import { meta, brand, SITE_URL } from '../../lib/site';
 import { graph, webPageNode, breadcrumbNode } from '../../lib/schema';
 
-const items = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) =>
-  a.data.year < b.data.year ? 1 : -1
+const posts = (await getCollection('journal', ({ data }) => !data.draft)).sort((a, b) =>
+  a.data.date < b.data.date ? 1 : -1
 );
 
-const cats = CATEGORIES as readonly string[];
-const m = meta.work;
+const cats = ['All', ...brand.journalCategories] as readonly string[];
+const m = meta.journal;
+
+const fmt = (d: string) =>
+  new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
 const jsonLd = graph(
-  webPageNode({ url: `${SITE_URL}/work`, name: m.title, description: m.description }),
+  webPageNode({ url: `${SITE_URL}/journal`, name: m.title, description: m.description }),
   breadcrumbNode([
     { name: 'Home', url: `${SITE_URL}/` },
-    { name: 'Work', url: `${SITE_URL}/work` },
+    { name: 'Journal', url: `${SITE_URL}/journal` },
   ])
 );
 ---
-<BaseLayout title={m.title} description={m.description} path="/work" jsonLd={jsonLd}>
+<BaseLayout title={m.title} description={m.description} path="/journal" jsonLd={jsonLd}>
   <div class="page-intro">
     <div class="wrap">
-      <p class="eyebrow">Work</p>
-      <h1 class="page-head">Designed, coded, <em class="headline-em">shipped</em>.</h1>
+      <p class="eyebrow">Journal</p>
+      <h1 class="page-head">Notes from the <em class="headline-em">studio</em>.</h1>
       <p class="page-lead">
-        Websites and brand work from the studio — including the site you're reading. For the
-        graphic archive, see <a href="/graphics" style="color:inherit">Graphics</a>.
+        Writing on design, websites and AI — what changes when machines can produce, and why
+        taste still decides.
       </p>
-      <div class="page-cta"><a class="btn-yellow" href="/contact">Start a project →</a></div>
     </div>
   </div>
 
@@ -51,15 +53,13 @@ const jsonLd = graph(
 
       <div class="grid3 writing-index" data-post-grid>
         {
-          items.map((cs) => (
-            <article class="post-item" data-cat={cs.data.category}>
-              <a class="post-card" href={`/work/${cs.id}`}>
-                <div class="post-cat">{cs.data.category}</div>
-                <h3>{cs.data.title}</h3>
-                <p class="post-excerpt">{cs.data.excerpt}</p>
-                <div class="post-meta">
-                  {cs.data.client} · {cs.data.industry} · {cs.data.year}
-                </div>
+          posts.map((p) => (
+            <article class="post-item" data-cat={p.data.category}>
+              <a class="post-card" href={`/journal/${p.id}`}>
+                <div class="post-cat">{p.data.category}</div>
+                <h3>{p.data.title}</h3>
+                <p class="post-excerpt">{p.data.excerpt}</p>
+                <div class="post-meta">Harald Palma · {fmt(p.data.date)}</div>
               </a>
             </article>
           ))

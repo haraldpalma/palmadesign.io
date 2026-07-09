@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Placeholder artwork">
+  <rect width="800" height="1000" fill="#141419"/>
+  <g fill="#fdd700">
+    <rect x="140" y="180" width="120" height="120"/>
+    <rect x="340" y="300" width="120" height="120"/>
+    <rect x="540" y="420" width="120" height="120"/>
+  </g>
+  <g fill="#f2f2f4">
+    <rect x="140" y="420" width="120" height="120"/>
+    <rect x="540" y="180" width="120" height="120"/>
+  </g>
+  <text x="400" y="880" font-family="Arial, sans-serif" font-size="30" letter-spacing="6" fill="#adadb4" text-anchor="middle">PLACEHOLDER — REPLACE IN /KEYSTATIC</text>
+</svg>

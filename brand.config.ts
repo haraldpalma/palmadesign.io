@@ -7,9 +7,9 @@ export const brand = {
   // ── Identity ──────────────────────────────────────────────────────────────
   name: 'Palma Design',
   legalName: 'Harald Walter Palma',
-  role: 'Design & no-code studio',
+  role: 'Design studio',
   description:
-    'Palma Design is a design and no-code studio in Vienna. We build client portals, internal tools and custom websites on Softr, Airtable and Claude — and keep them running. Premium & Enterprise Softr partner.',
+    'Palma Design is a Vienna design studio with 25 years of graphic design behind it. We design brands, graphics and hand-coded websites — built with AI, engineered for search, and made to last.',
 
   // ── URLs & contact ────────────────────────────────────────────────────────
   siteUrl: 'https://palmadesign.io',
@@ -42,22 +42,37 @@ export const brand = {
   // ── Navigation ──────────────────────────────────────────────────────────────
   nav: [
     { label: 'Work', href: '/work' },
+    { label: 'Graphics', href: '/graphics' },
+    { label: 'Journal', href: '/journal' },
     { label: 'Services', href: '/services' },
-    { label: 'Hosting', href: '/hosting' },
     { label: 'Studio', href: '/studio' },
   ],
 
   // ── Case-study categories (must match the enum in keystatic.config.ts) ──────
-  categories: ['All', 'Client portals', 'Internal tools', 'Websites', 'AI & automation'] as const,
+  categories: ['All', 'Websites', 'Brand & identity'] as const,
+
+  // ── Graphics-gallery categories (must match keystatic.config.ts) ────────────
+  graphicsCategories: [
+    'All',
+    'Logos & marks',
+    'Brand identity',
+    'Print & editorial',
+    'Campaign',
+    'Illustration',
+  ] as const,
+
+  // ── Journal categories (must match keystatic.config.ts) ─────────────────────
+  journalCategories: ['Design', 'Websites', 'AI', 'Studio'] as const,
 
   // ── Person/Org schema: expertise ────────────────────────────────────────────
   knowsAbout: [
-    'Softr',
-    'Airtable',
-    'No-code development',
-    'Client portals',
+    'Graphic design',
+    'Brand identity',
+    'Typography',
     'Web design',
-    'AI automation',
+    'Web development',
+    'SEO',
+    'AI-assisted design',
   ],
 
   // ── Default social share image (1200×630) ──────────────────────────────────

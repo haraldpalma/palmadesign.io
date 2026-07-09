@@ -1,0 +1,67 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_URL, SITE_NAME, OG_IMAGE } from '../../lib/site';
+import { graph, webPageNode, breadcrumbNode, blogPostingNode } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('journal', ({ data }) => !data.draft);
+  return posts.map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+
+const { p } = Astro.props;
+const { Content } = await render(p);
+const d = p.data;
+
+const url = `${SITE_URL}/journal/${p.id}`;
+const ogImage = d.ogImage ? d.ogImage.src : OG_IMAGE;
+const title = `${d.title} — ${SITE_NAME}`;
+const fmt = new Date(d.date).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const jsonLd = graph(
+  webPageNode({ url, name: title, description: d.excerpt }),
+  breadcrumbNode([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Journal', url: `${SITE_URL}/journal` },
+    { name: d.title, url },
+  ]),
+  blogPostingNode({
+    slug: p.id,
+    headline: d.title,
+    datePublished: d.date,
+    section: d.category,
+    description: d.excerpt,
+    image: d.ogImage?.src,
+  })
+);
+---
+<BaseLayout
+  title={title}
+  description={d.excerpt}
+  path={`/journal/${p.id}`}
+  ogImage={ogImage}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <article>
+    <div class="article-header">
+      <div class="article-narrow">
+        <a class="article-back" href="/journal">← Journal</a>
+        <div class="post-cat">{d.category}</div>
+        <h1 class="article-title">{d.title}</h1>
+        <div class="article-byline">
+          Harald Palma · {fmt} ·
+          <a href={`/journal/${p.id}.md`} style="color:var(--faint)">Markdown</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

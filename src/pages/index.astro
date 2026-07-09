@@ -12,11 +12,17 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b
   a.data.year < b.data.year ? 1 : -1
 );
 
+// Latest gallery pieces for the home teaser strip.
+const graphics = (await getCollection('graphics', ({ data }) => !data.draft))
+  .sort((a, b) => (a.data.year < b.data.year ? 1 : -1))
+  .slice(0, 3);
+const gSrc = (img: string) => (/^(https?:)?\//.test(img) ? img : `/images/graphics/${img}`);
+
 const expertise = [
-  { title: 'Client portals & apps', body: 'Authenticated portals, marketplaces and member sites on Softr and Airtable — roles and permissions solved once and kept solved.' },
-  { title: 'Internal tools', body: 'The app that replaces the spreadsheet: ordering systems, intranets, project trackers, knowledge bases. Fast to ship, easy to change.' },
-  { title: 'Custom websites', body: 'Fast static sites built with Claude — like this one — engineered to be found by Google and quoted by AI assistants.' },
-  { title: 'AI & automation', body: 'Make, REST APIs and AI wired into your workflow to remove the steps nobody enjoys — measured against real outcomes.' },
+  { title: 'Brand & identity', body: 'Logos, marks and full identity systems — one clear idea, held with discipline, applied everywhere.' },
+  { title: 'Print & campaign', body: 'Editorial, packaging and campaign graphics that still have to survive a press check — twenty-five years of them.' },
+  { title: 'Websites, written in code', body: 'Fast static sites designed in the studio and hand-coded with Claude — like this one — engineered to be found by Google and quoted by AI assistants.' },
+  { title: 'AI-assisted craft', body: 'The machines handle production; the studio keeps the taste. Every tool in the box, judgment always human.' },
 ];
 
 const jsonLd = graph(
@@ -28,8 +34,8 @@ const jsonLd = graph(
   <!-- HERO (dark) -->
   <header class="bleed hero-xl" data-sec="dark">
     <div class="wrap-wide">
-      <p class="hero-eyebrow">Design &amp; no-code Studio — Vienna</p>
-      <h1 class="hero-title">Software your team will <span class="accent">actually use</span></h1>
+      <p class="hero-eyebrow">Design Studio — Vienna</p>
+      <h1 class="hero-title">Twenty-five years of craft. <span class="accent">Zero templates</span></h1>
       <div class="hero-actions">
         <a class="btn-yellow" href="/work">View our work</a>
         <a class="btn-outline" href="/contact">Start a project →</a>
@@ -55,8 +61,8 @@ const jsonLd = graph(
     <div class="wrap-wide">
       <p class="agency-eyebrow">The Studio</p>
       <p class="agency-lead">
-        Palma Design is a Vienna-based design &amp; no-code studio —
-        <span class="muted">we build client portals, internal tools and custom websites on Softr, Airtable and Claude, and keep them running for years.</span>
+        Palma Design is a Vienna design studio —
+        <span class="muted">graphic design since the late nineties, and websites designed in the studio and written in code with AI. No templates, no page builders, nothing off the rack.</span>
       </p>
     </div>
   </section>
@@ -102,24 +108,60 @@ const jsonLd = graph(
     </div>
   </section>
 
-  <!-- TESTIMONIAL -->
-  <section class="bleed testimonial">
+  <!-- GRAPHICS TEASER -->
+  <section class="bleed workwrap" style="border-top:1px solid var(--line)">
     <div class="wrap-wide">
-      <p class="t-eyebrow">What our clients say</p>
-      <blockquote>
-        "A huge improvement over what we had before — much more efficient. The combination of
-        personalized budgets, dashboards and admin controls was exactly what we needed."
-      </blockquote>
-      <div class="t-who">
-        <div class="t-avatar"></div>
-        <div>
-          <div class="t-name">Baumit team</div>
-          <div class="t-role">Enterprise ordering system</div>
-        </div>
+      <div class="work-head">
+        <div class="label">Graphics</div>
+        <p class="title">Twenty-five years on <span class="on">paper</span> and <span class="on">pixels</span>.</p>
       </div>
-      <p class="t-note">Client feedback from the Baumit project — a named quote can replace this.</p>
+      <div class="home-gallery">
+        {
+          graphics.map((g) => (
+            <a class="home-gallery-item" href="/graphics" aria-label={`${g.data.title} — see all graphics`}>
+              <img src={gSrc(g.data.image)} alt={g.data.alt} loading="lazy" width="800" height="1000" />
+              <span class="home-gallery-cap">{g.data.category} · {g.data.year}</span>
+            </a>
+          ))
+        }
+      </div>
+      <div class="mt-cta">
+        <a class="work-link" href="/graphics">Browse the gallery →</a>
+      </div>
     </div>
   </section>
+
+  <style>
+    .home-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gutter);
+    }
+    @media (max-width: 720px) {
+      .home-gallery {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+    .home-gallery-item {
+      display: block;
+      text-decoration: none;
+    }
+    .home-gallery-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--ink);
+    }
+    .home-gallery-cap {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
 
   <!-- CTA (yellow) -->
   <section class="bleed cta-band" data-sec="yellow">
